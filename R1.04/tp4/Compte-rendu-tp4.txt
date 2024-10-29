@@ -1,0 +1,388 @@
+ ******************************************************
+DROUICHE Ilyès- TP4: Espace disque, Quotas, Archivage
+*******************************************************
+
+2.Espace disque
+==================
+
+2.1.Inventaire des disques et partitions
+-------------------------------------------
+
+1.
+drouichi@pc-dg-027-03:~$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+nvme0n1     259:0    0 238,5G  0 disk 
+└─nvme0n1p1 259:1    0 238,5G  0 part /
+
+2.
+Il y a 1 périphérique de stockage nvme0n1.
+
+3.
+Il y a une partition nvme0n1p1.
+
+-------------------------------------------------------------------------------------------------
+
+2.2.Taille et remplissage des partitions
+------------------------------------------
+
+drouichi@pc-dg-027-03:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+udev            7,7G     0  7,7G   0% /dev
+tmpfs           1,6G  1,3M  1,6G   1% /run
+/dev/nvme0n1p1  234G   77G  146G  35% /
+tmpfs           7,8G     0  7,8G   0% /dev/shm
+tmpfs           5,0M     0  5,0M   0% /run/lock
+erebus4:/users  1,8T  194G  1,5T  12% /users
+tmpfs           1,6G  124K  1,6G   1% /run/user/107270
+tmpfs           1,6G  152K  1,6G   1% /run/user/107387
+
+
+Périphérique de stockage
+
+				Espace total                     Espace libre
+				(en Go)                          (en Go)
+
+SSD de la station 		234                              146
+Serveur de fichiers erebus4 	1843,2		                 1536 
+Éventuelle clé USB 	
+
+
+drouichi@pc-dg-027-03:~$ duf
+╭────────────────────────────────────────────────────────────────────────────────────╮
+│ 1 local device                                                                     │
+├────────────┬────────┬───────┬────────┬─────────────────────┬──────┬────────────────┤
+│ MOUNTED ON │   SIZE │  USED │  AVAIL │         USE%        │ TYPE │ FILESYSTEM     │
+├────────────┼────────┼───────┼────────┼─────────────────────┼──────┼────────────────┤
+│ /          │ 233.7G │ 76.4G │ 145.3G │ [###.......]  32.7% │ ext4 │ /dev/nvme0n1p1 │
+╰────────────┴────────┴───────┴────────┴─────────────────────┴──────┴────────────────╯
+╭──────────────────────────────────────────────────────────────────────────────────╮
+│ 1 network device                                                                 │
+├────────────┬──────┬────────┬───────┬─────────────────────┬──────┬────────────────┤
+│ MOUNTED ON │ SIZE │   USED │ AVAIL │         USE%        │ TYPE │ FILESYSTEM     │
+├────────────┼──────┼────────┼───────┼─────────────────────┼──────┼────────────────┤
+│ /users     │ 1.7T │ 193.5G │  1.4T │ [#.........]  11.0% │ nfs4 │ erebus4:/users │
+╰────────────┴──────┴────────┴───────┴─────────────────────┴──────┴────────────────╯
+╭────────────────────────────────────────────────────────────────────────────────────────╮
+│ 6 special devices                                                                      │
+├──────────────────┬──────┬────────┬───────┬─────────────────────┬──────────┬────────────┤
+│ MOUNTED ON       │ SIZE │   USED │ AVAIL │         USE%        │ TYPE     │ FILESYSTEM │
+├──────────────────┼──────┼────────┼───────┼─────────────────────┼──────────┼────────────┤
+│ /dev             │ 7.7G │     0B │  7.7G │                     │ devtmpfs │ udev       │
+│ /dev/shm         │ 7.7G │     0B │  7.7G │                     │ tmpfs    │ tmpfs      │
+│ /run             │ 1.5G │   1.3M │  1.5G │ [..........]   0.1% │ tmpfs    │ tmpfs      │
+│ /run/lock        │ 5.0M │     0B │  5.0M │                     │ tmpfs    │ tmpfs      │
+│ /run/user/107270 │ 1.5G │ 124.0K │  1.5G │ [..........]   0.0% │ tmpfs    │ tmpfs      │
+│ /run/user/107387 │ 1.5G │ 152.0K │  1.5G │ [..........]   0.0% │ tmpfs    │ tmpfs      │
+╰──────────────────┴──────┴────────┴───────┴─────────────────────┴──────────┴────────────╯
+
+2.
+Le type de périphérique local est ext4.
+Le type de périphérque réseau est nfs4.
+
+----------------------------------------------------------------------------------------------
+
+2.3.Quotas
+------------
+
+drouichi@pc-dg-027-03:~$ quota -s
+Disk quotas for user drouichi (uid 107387): 
+     Filesystem   space   quota   limit   grace   files   quota   limit   grace
+ erebus4:/users  57876K   1465M   1514M            1506    200k    205k        
+
+
+							Place disque
+							(en Mo) 			Nb fichiers
+					
+Occupation actuelle 					56,519                          1506
+Quota 							1465                            200000
+Limite 		                                        1514                            205000
+Occupation en fin de TP une fois le ménage effectué     56,679                          1487
+(cases à remplir plus tard) 	
+
+-----------------------------------------------------------------------------------------	
+
+2.4.Espace occupé par une entrée
+-----------------------------------
+1.
+drouichi@pc-dg-027-03:~$ du -h R1.04
+20K     R1.04/tp4
+48K     R1.04/tp2
+48K     R1.04/tp1
+20K     R1.04/tp3/tp-filtres
+60K     R1.04/tp3
+212K    R1.04
+
+Le répertoire R1.04 occupe 212 Ko.
+
+2.
+drouichi@pc-dg-027-03:~$ du -h ~
+[...]
+4,0K    /users/info/etu-1a/drouichi/Documents
+20K     /users/info/etu-1a/drouichi/R1.04/tp4
+48K     /users/info/etu-1a/drouichi/R1.04/tp2
+48K     /users/info/etu-1a/drouichi/R1.04/tp1
+20K     /users/info/etu-1a/drouichi/R1.04/tp3/tp-filtres
+60K     /users/info/etu-1a/drouichi/R1.04/tp3
+212K    /users/info/etu-1a/drouichi/R1.04
+4,0K    /users/info/etu-1a/drouichi/Pictures
+72K     /users/info/etu-1a/drouichi/.pki/nssdb
+76K     /users/info/etu-1a/drouichi/.pki
+57M     /users/info/etu-1a/drouichi
+
+Mon homedir occupe un espace de 57 Mo.
+
+3.
+drouichi@pc-dg-027-03:~$ quota -s
+Disk quotas for user drouichi (uid 107387): 
+     Filesystem   space   quota   limit   grace   files   quota   limit   grace
+ erebus4:/users  57884K   1465M   1514M            1507    200k    205k   
+ 
+Oui, 57884 Ko est environ égale à 57Mo.
+
+
+
+1.
+drouichi@pc-dg-027-03:~$ ncdu
+
+2.
+ncdu 1.18 ~ Use the arrow keys to navigate, press ? for help
+--- /users/info/etu-1a/drouichi ------------------------------------------------------------------------------------
+   42,6 MiB [################] /.mozilla
+    4,9 MiB [#               ] /.eclipse
+    4,8 MiB [#               ] /.local
+    2,8 MiB [#               ] /.config
+  548,0 KiB [                ] /R1.01
+  232,0 KiB [                ] /.java
+[...]
+
+Plus gros répertoire /.mozilla
+
+3.
+--- /users/info/etu-1a/drouichi/.mozilla ---------------------------------------------------------------------------
+                               /..
+   42,6 MiB [################] /firefox
+e   4,0 KiB [                ] /extensions
+
+Plus gros sous-répertoire: /firefox
+
+-------------------------------------------------------------------------------------------------
+
+
+2.5.Réduction de la place disque occupée sur l'espace disque du serveur erebus4
+---------------------------------------------------------------------------------
+
+2.
+drouichi@pc-dg-027-03:~$ find * | grep class
+R1.01/TP3B/out/production/TP3B/Explore_Strings.class
+R1.01/TP1/out/production/TP1/Permutation.class
+R1.01/TP1/out/production/TP1/MoyenneNotes.class
+R1.01/TP1/out/production/TP1/Moi.class
+R1.01/TP1/out/production/TP1/Exemple.class
+R1.01/TP1/out/production/TP1/ConversionsBis.class
+R1.01/TP1/out/production/TP1/EsTest.class
+R1.01/TP1/out/production/TP1/Conversions.class
+R1.01/TP1/out/production/TP1/Jeu.class
+R1.01/TP4/out/production/TP4/Point.class
+R1.01/TP4/out/production/TP4/Triangle_Main.class
+R1.01/TP4/out/production/TP4/TriangleCompose.class
+R1.01/TP4/out/production/TP4/TriangleAgrege.class
+R1.01/TP3A/out/production/TP3A/Triangle.class
+R1.01/TP3A/out/production/TP3A/Cercle.class
+R1.01/TP3A/out/production/TP3A/Rectangle.class
+R1.01/TP3A/out/production/TP3A/Utilitaire.class
+R1.01/TP3A/out/production/TP3A/Geometrie.class
+R1.01/TP2B/out/production/TP2B/Nim.class
+R1.01/TP2B/out/production/TP2B/Calculs.class
+R1.01/TP2A/out/production/TP2A/Calendrier.class
+R1.01/TP2A/out/production/TP2A/Localisation.class
+R1.01/TP2A/out/production/TP2A/Meteo.class
+R1.01/TP2A/out/production/TP2A/Competition.class
+R1.04/tp2/Prg.class
+R1.04/tp1/Essai.class
+
+drouichi@pc-dg-027-03:~/R1.01$ rm ~/*/*/*/*/*/*.class ~/*/*/*.class
+
+drouichi@pc-dg-027-03:~/R1.01$ find * | grep class 
+drouichi@pc-dg-027-03:~/R1.01$ 
+
+5.
+drouichi@pc-dg-027-03:~$ ls ~/R*/tp*
+/users/info/etu-1a/drouichi/R1.04/tp1:
+compte-rendu-tp1.txt  compte-rendu-tp1.txt~  Essai.java  Essai.java~
+
+/users/info/etu-1a/drouichi/R1.04/tp2:
+compte-rendu-tp2.txt  compte-rendu-tp2.txt~  Essai.java  Prg.java  Proverbes.txt  toto4
+
+/users/info/etu-1a/drouichi/R1.04/tp3:
+Compte-rendu-tp3.txt  Compte-rendu-tp3.txt~  tp-filtres  trace
+
+/users/info/etu-1a/drouichi/R1.04/tp4:
+compte-rendu-tp4.txt  comte-rendu-tp4.txt~
+
+
+drouichi@pc-dg-027-03:~$ rm -r ~/R*/tp*/*~
+rm: remove regular file '/users/info/etu-1a/drouichi/R1.04/tp1/compte-rendu-tp1.txt~'? y
+rm: remove regular file '/users/info/etu-1a/drouichi/R1.04/tp1/Essai.java~'? y
+rm: remove regular file '/users/info/etu-1a/drouichi/R1.04/tp2/compte-rendu-tp2.txt~'? y
+rm: remove regular file '/users/info/etu-1a/drouichi/R1.04/tp3/Compte-rendu-tp3.txt~'? y
+rm: remove regular file '/users/info/etu-1a/drouichi/R1.04/tp4/comte-rendu-tp4.txt~'? y
+
+drouichi@pc-dg-027-03:~$ ls ~/R*/tp*
+/users/info/etu-1a/drouichi/R1.04/tp1:
+compte-rendu-tp1.txt  Essai.java
+
+/users/info/etu-1a/drouichi/R1.04/tp2:
+compte-rendu-tp2.txt  Essai.java  Prg.java  Proverbes.txt  toto4
+
+/users/info/etu-1a/drouichi/R1.04/tp3:
+Compte-rendu-tp3.txt  tp-filtres  trace
+
+/users/info/etu-1a/drouichi/R1.04/tp4:
+compte-rendu-tp4.txt
+
+--------------------------------------------------------------------------------------------------
+
+3.Archivage d'un répertoire
+=============================
+
+3.1.Creation d'une archive à partir d'un répertoire
+------------------------------------------------------
+
+8.
+drouichi@pc-dg-037-03:~$ ls -l | sort
+drwxr-xr-x 12 drouichi infobut1  4096  4 oct.  07:49 R1.01
+drwxr-xr-x  2 drouichi infobut1  4096 13 sept. 10:50 toto
+drwxr-xr-x  2 drouichi infobut1  4096  5 oct.  10:13 Downloads
+drwxr-xr-x  2 drouichi infobut1  4096  5 sept. 13:29 Documents
+drwxr-xr-x  2 drouichi infobut1  4096  5 sept. 13:29 Music
+drwxr-xr-x  2 drouichi infobut1  4096  5 sept. 13:29 Pictures
+drwxr-xr-x  2 drouichi infobut1  4096  5 sept. 13:29 Public
+drwxr-xr-x  2 drouichi infobut1  4096  5 sept. 13:29 Templates
+drwxr-xr-x  2 drouichi infobut1  4096  5 sept. 13:29 Videos
+drwxr-xr-x  4 drouichi infobut1  4096  5 oct.  10:13 R1.05
+drwxr-xr-x  4 drouichi infobut1  4096  8 sept. 13:15 Desktop
+drwxr-xr-x  6 drouichi infobut1  4096  4 oct.  10:10 R1.04
+-rw-r--r--  1 drouichi infobut1 17258  6 oct.  16:26 R1.01.7z
+-rw-r--r--  1 drouichi infobut1 17648  6 oct.  16:25 R1.01.tar.xz
+-rw-r--r--  1 drouichi infobut1 20233  6 oct.  16:25 R1.01.tar.bz2
+-rw-r--r--  1 drouichi infobut1 22493  6 oct.  16:26 R1.01.tar.zst
+-rw-r--r--  1 drouichi infobut1 25333  6 oct.  16:25 R1.01.tar.gz
+-rw-r--r--  1 drouichi infobut1 58012  6 oct.  16:24 R1.01.zip
+total 220
+
+
+9.
+drouichi@pc-dg-037-03:~$ du -h R1.01.* | sort
+20K     R1.01.7z
+20K     R1.01.tar.bz2
+20K     R1.01.tar.xz
+24K     R1.01.tar.zst
+28K     R1.01.tar.gz
+60K     R1.01.zip
+
+L'archive 7z est la plus petite.
+
+10.
+drouichi@pc-dg-037-03:~$ du -hs R1.01
+480K    R1.01
+
+11.
+Facteurs de compression:
+7z -> 480/20 = 24 
+tarbz2 -> 480/20 = 24
+tarxz -> 480/20 = 24
+tarzst -> 480/24 = 20
+targz ->  480/28 = 17,14
+zip -> 480/60 = 8
+
+-------------------------------------------------------------------------------------------------
+
+3.2.Restauration d'un répertoire à partir d'une archive
+==========================================================
+
+3.
+drouichi@pc-dg-037-03:~/désarchivage$ ls
+R1.01
+
+Le répertoire R1.01 est recrée dans le répertoire courant 
+
+4.
+drouichi@pc-dg-037-03:~/désarchivage$ diff -r R1.01 ~/R1.01
+drouichi@pc-dg-037-03:~/désarchivage$ 
+
+Les 2 répertoires sont bien identiques.
+
+3.3.Vérification de l'intégrité d'une archive
+=================================================
+
+1.
+drouichi@pc-dg-037-03:~/désarchivage$ cd
+drouichi@pc-dg-037-03:~$ zip -T R1.01.zip
+test of R1.01.zip OK
+drouichi@pc-dg-037-03:~$ gzip -t R1.01.tar.gz
+drouichi@pc-dg-037-03:~$ bzip2 -t R1.01.tar.bz2
+drouichi@pc-dg-037-03:~$ xz -t R1.01.tar.xz
+drouichi@pc-dg-037-03:~$ zstd -t R1.01.tar.zst
+R1.01.tar.zst       : 194560 bytes                                             
+drouichi@pc-dg-037-03:~$ 7z t R1.01.7z
+
+7-Zip [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=fr_FR.UTF-8,Utf16=on,HugeFiles=on,64 bits,6 CPUs Intel(R) Core(TM) i5-8400 CPU @ 2.80GHz (906EA),ASM,AES-NI)
+
+Scanning the drive for archives:
+1 file, 17258 bytes (17 KiB)
+
+Testing archive: R1.01.7z
+--
+Path = R1.01.7z
+Type = 7z
+Physical Size = 17258
+Headers Size = 1629
+Method = LZMA2:17
+Solid = +
+Blocks = 1
+
+Everything is Ok
+
+Folders: 41
+Files: 77
+Size:       106880
+Compressed: 17258
+drouichi@pc-dg-037-03:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
