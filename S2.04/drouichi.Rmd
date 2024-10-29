@@ -1,0 +1,232 @@
+---
+title: "What link can we make between nutriscore grade (A,B,C,D,E) and nutritional values for the products 'en:poultry' in France ?"
+output:
+  pdf_document: default
+  word_document:
+    toc: yes
+  html_document:
+    toc: yes
+    always_allow_html: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+drouichi <- read.delim("drouichi.csv", sep = "\t")
+
+data_poultry <- drouichi %>%
+  filter(grepl("en:french-poultry", labels_tags)) %>%
+  select(everything())
+
+```
+
+Main objective : Present to English consumers consistant data about the
+link between french products and nutriscore grade to make them inform
+better than before.
+
+What is the nutriscore ? : The nutriscore is a grade system with letters
+and colors, starting to A and dark green and finishing by E and red,
+trying to inform consumers when they buy a product about the nutritional
+value of it. More the letter is closer to A and more the product can be
+considered healthy.
+
+Which products will I study ? : The products I'm studying are on the
+family "en:poultry" in France.
+
+How many observations do I have ? : 
+9345 observations of 27 variables at the start. 
+3297 observations of 27 variables with the "en:french-poultry" constraint.
+
+Organization of this document : The rest of this document contains 4 bar
+chart and 1 table chart. Each graphic has an analysis and interpretation
+below them.
+
+First graphic : This is a bar chart presents the average quantity of
+sugar on the y axis according to each nutriscore per 100 g of
+'en:poultry' products" on the x axis.
+
+```{r, echo=FALSE}
+sugars_100g <- as.numeric(as.character(drouichi$sugars_100g))
+
+moyenne_sugars <- data_poultry %>%
+  group_by(nutriscore_grade) %>%
+  summarize(Moyenne_Sugars = mean(sugars_100g, na.rm = TRUE))
+
+hauteurs <- moyenne_sugars$Moyenne_Sugars
+
+# Couleurs spécifiques pour chaque barre
+couleurs <- c("darkgreen", "green", "yellow", "orange", "red")
+
+# Créer un histogramme avec des couleurs spécifiques
+barplot(hauteurs, 
+           names.arg = c("A","B","C","D","E"),
+        xlab = "Nutriscore Grade",
+        ylab = "Sugars (per 100g)",
+        main = "Average quantity of sugar for each nutriscore per 100 g of products",
+        col = couleurs)
+
+```
+
+The average quantity of sugar for the products "en:poultry" in France is
+pretty weak except for the products with the E nutriscore. In average,
+the products with the E nutriscore contain 3 times more sugar than the
+products with the D nutriscore to reach above 3 grams of sugar for 100
+grams of product. More the nutriscore is worse and more the products
+have a chance to contain more sugar.
+
+Second graphic : This is a bar chart presents the average quantity of
+salt on the y axis according to each nutriscore per 100 g of
+'en:poultry' products" on the x axis.
+
+```{r, echo=FALSE}
+salt_100g <- as.numeric(as.character(drouichi$salt_100g))
+
+moyenne_salt <- data_poultry %>%
+  group_by(nutriscore_grade) %>%
+  summarize(Moyenne_Salt = mean(salt_100g, na.rm = TRUE))
+
+hauteurs <- moyenne_salt$Moyenne_Salt
+
+# Couleurs spécifiques pour chaque barre
+couleurs <- c("darkgreen", "green", "yellow", "orange", "red")
+
+# Créer un histogramme avec des couleurs spécifiques
+barplot(hauteurs, 
+           names.arg = c("A","B","C","D","E"),
+        xlab = "Nutriscore Grade",
+        ylab = "Salt (per 100g)",
+        main = "Average quantity of salt for each nutriscore per 100 g of products",
+        col = couleurs)
+
+```
+
+The average quantity of salt is pretty high except for the products with
+the A nutriscore. The products with the B nutriscore have almost 4 times
+more salt than those with the A nutriscore and those with the D
+nutriscore contain 2 times more salt than those with the B nutriscore.
+The products with the C nutriscore are between both.
+
+On top of that, we can say the products "en:poultry" in France are more
+salted than sugared in general.
+
+Third graphic : This is a bar chart presents the average quantity of fat
+on the y axis according to each nutriscore per 100 g of 'en:poultry'
+products" on the x axis.
+
+```{r, echo=FALSE}
+fat_100g <- as.numeric(as.character(drouichi$fat_100g))
+
+moyenne_gras <- data_poultry %>%
+  group_by(nutriscore_grade) %>%
+  summarize(Moyenne_Gras = mean(fat_100g, na.rm = TRUE))
+
+hauteurs <- moyenne_gras$Moyenne_Gras
+
+# Couleurs spécifiques pour chaque barre
+couleurs <- c("darkgreen", "green", "yellow", "orange", "red")
+
+# Créer un histogramme avec des couleurs spécifiques
+barplot(hauteurs, 
+           names.arg = c("A","B","C","D","E"),
+        xlab = "Nutriscore Grade",
+        ylab = "fat (per 100g)",
+        main = "Average quantity of fat for each nutriscore per 100 g of products",
+        col = couleurs)
+
+```
+
+The average quantity of fat is really high in general. In average, only
+The products with the A nutriscore have a weak average quantity of fat
+because these are 2 times less fat than products with the B nutriscore.
+The other products contain between under 10 grams to 15 grams of fat per
+100 grams of product except the products with the E nutriscore which
+reach beyond 25 grams of fat per 100 grams of product in average.
+
+On top of that, we can say the products "en:poultry" in France are
+really more fat than sugared and salted.
+
+Last graphic : This is a bar chart presents the average quantity of
+proteins on the y axis according to each nutriscore per 100 g of
+'en:poultry' products" on the x axis.
+
+```{r, echo=FALSE}
+
+proteins_100g <- as.numeric(as.character(drouichi$proteins_100g))
+
+moyenne_prot <- data_poultry %>%
+  group_by(nutriscore_grade) %>%
+  summarize(Moyenne_Proteines = mean(proteins_100g, na.rm = TRUE))
+
+hauteurs <- moyenne_prot$Moyenne_Proteines
+
+
+
+# Couleurs spécifiques pour chaque barre
+couleurs <- c("darkgreen", "green", "yellow", "orange", "red")
+
+# Créer un histogramme avec des couleurs spécifiques
+barplot(hauteurs, 
+           names.arg = c("A","B","C","D","E"),
+        xlab = "Nutriscore Grade",
+        ylab = "Proteins (per 100g)",
+        main = "Average quantity of proteins for each nutriscore per 100 g of products",
+        col = couleurs)
+
+```
+
+The products "en:poultry" in France are really proteined. In average,
+all products contain at least more than 15 grams proteins per 100 grams
+of product. The products with the A nutriscore have beyond 20 grams of
+proteins and they are the only one in this case. The B and C nutriscore
+contain the same average of proteins on their products to reach almost
+20 grams of proteins per 100 grams. The products with the D and E
+nutriscore have a little bit less proteins than the products with a
+better nutriscore.
+
+The table : This is a table presents the average quantity of fat on the
+y axis according to each nutriscore per 100 g of 'en:poultry' products"
+on the x axis.
+
+```{r, echo=FALSE}
+
+library(knitr)
+library(dplyr)
+
+
+nutriscore_grade <- factor(drouichi$nutriscore_grade)
+
+# Compter le nombre de produits pour chaque Nutriscore
+proportions_nutriscore <- data_poultry %>%
+  group_by(nutriscore_grade) %>%
+  summarize(Proportion = n() / nrow(data_poultry)*100)%>%
+  rename(Nutriscore_grade = nutriscore_grade) %>% # Renommer temporairement le champ pour l'affichage
+  rename(`Proportion (in%)` = Proportion) %>% # Renommer la colonne des proportions
+  mutate(`Proportion (in%)` = round(`Proportion (in%)`, 1)) # Arrondir à 1 chiffre après la virgule
+
+
+# Afficher le tableau avec les proportions des produits pour chaque Nutriscore
+kable(proportions_nutriscore, caption = "Proportion of products for each nutriscore grade")
+
+
+```
+
+This table shows that over 40% of products has the A nutriscore and 48%
+of these represent the B and C nutriscore. Moreover, less than 1% of
+products gets the E nutriscore. We might say the majority of
+"en;poultry" products are healthy.
+
+To conclude, the products of the family "en:poultry" in France are more
+proteined and fat than salted and sugared. We can notice with all these
+graphics that the products with E nutriscore have a high average for all
+of them so we may say the E nutriscore products have bad nutritional
+values in all case but these products represent less than 1% of
+"en:poultry" product, combined with D nutriscore products, it always
+represents less than 10% of products in total. We can understand the
+"en:poultry" products in France are probably a proteined range of
+product with the majority of these products have at least the C
+nutriscore.
