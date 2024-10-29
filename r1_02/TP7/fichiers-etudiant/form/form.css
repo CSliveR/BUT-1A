@@ -1,0 +1,47 @@
+body {
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+}
+
+div{
+  padding-bottom: 10px;
+}
+
+form > *{
+  display: flex;
+  height: 30px;
+}
+
+div label{
+  display: flex;
+  flex-basis: 240px;
+}
+
+fieldset{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+p input{
+  width: 100%;
+  background-color: rgb(240,240,240);
+  border-color: gray;
+  height: 40px;
+}
+
+#email:valid{
+  background-color: green;
+}
+
+#email:invalid:not(:placeholder-shown){
+  border-color: tomato;
+  background-color: pink;
+}
+
+
+
+
+
+

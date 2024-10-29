@@ -1,0 +1,29 @@
+nav ul {
+    display: flex;
+    background-color: gray;
+    justify-content: flex-start;
+    align-items: center;
+    height: 55px;
+    border-radius: 30px;
+    box-shadow: 20px 10px 10px black;
+}
+
+nav ul li{
+    list-style-type: none;
+}
+
+a{
+    padding: 1em 2em 1em 2em;
+    color: white;
+    text-decoration: none;
+}
+
+
+li:first-child a:hover{
+    border-radius: 30px;
+}
+
+a:hover{
+    background-color: tomato;
+}
+

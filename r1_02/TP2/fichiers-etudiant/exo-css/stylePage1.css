@@ -1,0 +1,135 @@
+/*Ajouter ci-dessous les règles pour body */
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  color: #4D4D4D;
+  margin: 50px;
+  background-image: url(bg-198-198.png);
+}
+
+
+/*Ajouter ci-dessous les règles pour le header */
+
+header{
+  background-color: orangered
+}
+
+h1{
+  text-decoration: underline;
+  font-size: small-caps;
+}
+
+/*Ajouter ci-dessous les règles pour la section */
+
+section{
+  background-color: rgba(77, 145, 233, 0.897);
+}
+
+section p{
+  text-align: justify;
+}
+
+/*Ajouter ci-dessous les règles pour le premier aside */
+
+aside:nth-child(2){
+  background-color: yellow;
+}
+
+aside:nth-child(2) ul li{
+  list-style-type: none ;
+}
+
+
+/*Ajouter ci-dessous les règles pour le deuxième aside */
+
+aside:nth-child(3){
+  background-color: #FF66D5;
+}
+
+aside:nth-child(3) ol li{
+  list-style-type: upper-roman;
+}
+
+
+
+/*Ajouter ci-dessous les règles pour le footer */
+
+footer{
+  background-color: lightgreen;
+}
+
+footer p{
+  font-style: italic;
+}
+
+/*******************************************************************/
+
+header, section, aside, footer{
+  padding: 10px;
+}
+
+img{
+  opacity: 0.6;
+}
+
+table{
+  border: 3px solid yellow;
+}
+
+tr:first-child{
+  background-color: darkgreen;
+  color: white;
+}
+
+th{
+  border: 3px solid yellow;
+}
+
+td{
+  border: 3px solid yellow;
+}
+
+
+/***************************/
+/*NE PAS MODIFIER*/
+/*règles de positionnement*/
+
+div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div > * {
+  flex: 1 100%;
+}
+
+header,
+footer,
+div > * {
+  border: 1px solid gray;
+}
+
+@media (min-width: 800px) {
+  section {
+    flex: 3 0px;
+  }
+  section + aside {
+    order: 1;
+  }
+  section {
+    order: 2;
+  }
+  aside + aside {
+    order: 3;
+  }
+}
+
+@media (min-width: 600px) {
+  section + aside {
+    flex: 1 auto;
+  }
+  aside + aside {
+    flex: 1 auto;
+  }
+}

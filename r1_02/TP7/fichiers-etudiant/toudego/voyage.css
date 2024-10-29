@@ -1,0 +1,63 @@
+body{
+    font-family: Arial, Verdana, sans-serif;
+    color: #27353D;
+}
+
+#Tou{color:#006CA4;}
+#De{color:#FF7600;}
+#Go{color:#CE2823;}
+
+header, blockquote, footer{
+    text-align: center;
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+section a{
+    color: white;
+    background-color: #006CA4;
+    text-decoration-line: none;
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+section a:hover{
+    background-color:#FF7600;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+div{
+    box-shadow: 7px 4px 4px gray; 
+}
+
+div a{
+    display: flex;
+    color:#006CA4;
+    font-weight: bold;
+    margin-left: 5px;
+    text-decoration-line: none;
+    padding: 15px;
+}
+
+footer a{
+    text-decoration-line: none;
+    font-weight: bold;
+    font-style: italic;
+}
+
+div a:hover, footer a:hover{
+    text-decoration: underline;
+}
+

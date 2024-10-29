@@ -1,0 +1,30 @@
+article {
+  background-color: lightgrey;
+  border: 1px solid gray;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: normal;
+  flex-basis: 350px;
+}
+
+article section {
+  width: 300px;
+}
+
+article section:first-child {
+  background-color: cornflowerblue;
+  flex-grow: 1;
+  flex-shrink: 2;
+}
+
+article section:nth-child(2) {
+  background-color: white;
+  flex-grow: 2;
+}
+
+article section:last-child {
+  background-color: red;
+}
