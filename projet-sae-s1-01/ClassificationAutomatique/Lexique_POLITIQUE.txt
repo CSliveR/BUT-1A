@@ -1,0 +1,17 @@
+politique:3
+président:3
+élection:3
+gouvernement:2
+vote:1
+sénat:2
+religion:2
+maire:3
+député:3
+scrutin:3
+voix:2
+socialiste:2
+ministre:3
+Etat:2
+sondage:3
+débat:3
+chômage:3
