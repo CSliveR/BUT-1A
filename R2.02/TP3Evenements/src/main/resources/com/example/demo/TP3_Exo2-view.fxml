@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane fx:id="gridPane">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="labelNom" text="Nom:" />
+            <Label fx:id="labelPrenom" layoutX="10.0" layoutY="16.0" text="Prénom:" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <Label fx:id="labelLogin" layoutX="10.0" layoutY="46.0" text="Login:" GridPane.rowIndex="2" />
+            <Label fx:id="labelMdP" layoutX="10.0" layoutY="16.0" text="Mot de passe:" GridPane.rowIndex="3" />
+            <TextField fx:id="tfNom" GridPane.columnIndex="1" />
+            <TextField fx:id="tfPrenom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="leLogin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="tfMdP" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="btnReset" mnemonicParsing="false" onAction="#resetButtonAction" text="Reset" />
+            <Button fx:id="btnVerifier" layoutX="525.0" layoutY="17.0" mnemonicParsing="false" onAction="#verifierButtonAction" text="Vérifier" />
+            <Button fx:id="btnQuitter" layoutX="430.0" layoutY="17.0" mnemonicParsing="false" onAction="#quitterButtonAction" text="Quitter" />
+        </buttons>
+      </ButtonBar>
+      <TextArea fx:id="txtArea" prefHeight="200.0" prefWidth="200.0" text="Passez la souris ici !&#10;" />
+   </children>
+</VBox>
