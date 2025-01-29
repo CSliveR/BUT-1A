@@ -1,0 +1,274 @@
+**************************************************************************
+DROUICHE Ilyès- TP5: Permissions Unix, Scripts shell, Liens symboliques 
+*************************************************************************
+
+2.Droits d'accès aux fichiers
+===============================
+
+2.
+drouichi@pc-dg-025-07:~/Public$ touch fichier.txt
+drouichi@pc-dg-025-07:~/Public$ 
+
+3.4.
+drouichi@pc-dg-025-07:~$ chmod g+rx .
+
+drouichi@pc-dg-025-07:~/Public$ ls -l
+total 4
+-rw-r--r-- 1 drouichi infobut1 34 11 oct.  10:21 fichier.txt
+-rw-r--r-- 1 drouichi infobut1  0 11 oct.  10:20 fichier.txt~
+drouichi@pc-dg-025-07:~/Public$ chmod g+rx fichier.txt
+drouichi@pc-dg-025-07:~/Public$ ls -l
+total 4
+-rw-r-xr-- 1 drouichi infobut1 34 11 oct.  10:21 fichier.txt
+-rw-r--r-- 1 drouichi infobut1  0 11 oct.  10:20 fichier.txt~
+drouichi@pc-dg-025-07:~/Public$ 
+
+
+6.
+drouichi@pc-dg-025-07:~/Public$ cp -r /users/info/pub/1a/R1.04/tp-permissions/ .
+drouichi@pc-dg-025-07:~/Public$ ls -l
+total 8
+-rw-r-xr-- 1 drouichi infobut1   18 11 oct.  10:25 fichier.txt
+-rw-r--r-- 1 drouichi infobut1    0 11 oct.  10:20 fichier.txt~
+drwxr-xr-x 2 drouichi infobut1 4096 11 oct.  10:33 tp-permissions
+
+7.
+drouichi@pc-dg-025-07:~/Public$ chmod u+x tp-permissions/exemple-script
+drouichi@pc-dg-025-07:~/Public$ chmod g+x tp-permissions/exemple-script 
+drouichi@pc-dg-025-07:~/Public$ ls -l tp-permissions/
+total 4
+-rwxr-xr-- 1 drouichi infobut1 199 11 oct.  10:33 exemple-script
+
+8.
+drouichi@pc-dg-025-07:~/Public/tp-permissions$ ./exemple-script toto
+Bonjour,
+Je suis le script ./exemple-script
+Mon propriétaire est : drouichi
+Je suis exécuté par : drouichi
+Le paramètre qui m'a été transmis est : toto
+
+
+drouichi@pc-dg-025-07:~$ chmod g-rw .
+
+
+-----------------------------------------------------------------------------------------------------
+
+3.Scripts shell
+=================
+
+1.Variable d'environnement PATH
+----------------------------------
+
+1.
+drouichi@pc-dg-025-07:~$ echo "$PATH"
+/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/users/info/pub/bin
+
+2.
+6 répertoires sont listés sur la variable PATH.
+
+3.
+drouichi@pc-dg-025-07:~$ PATH=toto
+
+4.
+drouichi@pc-dg-025-07:~$ ls
+bash: ls: command not found
+
+5.
+drouichi@pc-dg-025-07:~$ /bin/ls
+désarchivage  Documents  Music     Public  R1.01.7z       R1.01.tar.gz  R1.01.tar.zst  R1.04  Templates  Videos
+Desktop       Downloads  Pictures  R1.01   R1.01.tar.bz2  R1.01.tar.xz  R1.01.zip      R1.05  toto
+
+Le logiciel ls s'éxecute car cet executable se trouve dans /bin.
+
+6.
+drouichi@pc-dg-025-07:~$ echo "$PATH"
+/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/users/info/pub/bin
+
+La variable PATH reprend sa valeur initiale.
+
+7.
+drouichi@pc-dg-025-07:~$ mkdir ~/.local/bin/
+
+drouichi@pc-dg-025-07:~$ ls .local
+bin  share  state
+
+drouichi@pc-dg-025-07:~$ echo "$PATH"
+/users/info/etu-1a/drouichi/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/users/info/pub/bin
+
+Oui, le répertoire ~/.local/bin se trouve bien dans la variable PATH.
+
+----------------------------------------------------------------------------------------------------
+
+3.2.Premier script
+---------------------
+
+1.
+drouichi@pc-dg-025-07:~$ cd ~/.local/bin
+
+drouichi@pc-dg-025-07:~/.local/bin$ touch essai-script
+drouichi@pc-dg-025-07:~/.local/bin$ ls
+essai-script
+
+2.
+drouichi@pc-dg-025-07:~/.local/bin$ chmod -R +x essai-script.txt
+
+drouichi@pc-dg-025-07:~/.local/bin$ ls -l
+total 4
+-rwxr-xr-x 1 drouichi infobut1 32 11 oct.  11:36 essai-script
+-rw-r--r-- 1 drouichi infobut1  0 11 oct.  11:35 essai-script~
+
+
+3.
+drouichi@pc-dg-025-07:~/.local/bin$ ./essai-script 
+Ça marche !
+
+drouichi@pc-dg-025-07:~$ essai-script
+Ça marche !
+
+
+-------------------------------------------------------------------------------------------------
+
+3.3.Script avec paramètre 
+---------------------------
+
+1.2.
+drouichi@pc-dg-025-07:~/.local/bin$ touch essai-script
+
+drouichi@pc-dg-025-07:~/.local/bin$ chmod -R +x script-param
+drouichi@pc-dg-025-07:~/.local/bin$ ls -l
+total 8
+-rwxr-xr-x 1 drouichi infobut1 32 11 oct.  11:36 essai-script
+-rw-r--r-- 1 drouichi infobut1  0 11 oct.  11:35 essai-script~
+-rwxr-xr-x 1 drouichi infobut1 52 11 oct.  11:42 script-param
+-rw-r--r-- 1 drouichi infobut1  0 11 oct.  11:34 script-param~
+
+drouichi@pc-dg-025-07:~/.local/bin$ cd
+
+drouichi@pc-dg-025-07:~$ script-param toto
+La valeur du paramètre est : toto
+
+---------------------------------------------------------------------------------------------------
+
+3.4. Script d'archivage simple
+---------------------------------
+
+#!/bin/bash
+archive=/tmp
+tar --xz -cvf "$archive"/R1.01.tar.xz ~/R1.01
+xz -t "$archive"/R1.01.tar.xz
+
+---------------------------------------------------------------------------------------------------
+
+3.5. Script d'archivage avec paramètre
+------------------------------------------
+
+#!/bin/bash
+archive=/tmp
+tar --xz -cvf "$archive"/"$1".tar.xz "$1"
+xz -t "$archive"/"$1".tar.xz
+
+---------------------------------------------------------------------------------------------------
+
+3.6. Script d'archivage amélioré
+-----------------------------------
+
+pas compris 
+
+--------------------------------------------------------------------------------------------------
+
+4.Liens symboliques
+====================
+
+4.1.Lien symbolique comme "raccourci" vers un répertoire
+-----------------------------------------------------------
+
+1.
+drouichi@pc-dg-039-03:~/R1.04$ ln -s /users/info/pub/1a/R1.04/ pub
+
+drouichi@pc-dg-039-03:~/R1.04$ ls -l
+total 52
+-rw-r--r-- 1 drouichi infobut1 14859 13 sept. 17:58 Avare-1.0.txt
+lrwxrwxrwx 1 drouichi infobut1    25 13 oct.  17:50 pub -> /users/info/pub/1a/R1.04/
+-rw-r--r-- 1 drouichi infobut1  6352  1 oct.  11:49 résumé-commandes.txt
+-rw-r--r-- 1 drouichi infobut1  6313  1 oct.  11:49 résumé-commandes.txt~
+drwxr-xr-x 2 drouichi infobut1  4096  4 oct.  11:45 tp1
+drwxr-xr-x 2 drouichi infobut1  4096  4 oct.  11:45 tp2
+drwxr-xr-x 3 drouichi infobut1  4096  4 oct.  11:45 tp3
+drwxr-xr-x 2 drouichi infobut1  4096  6 oct.  17:24 tp4
+drwxr-xr-x 2 drouichi infobut1  4096 13 oct.  17:49 tp5
+
+2.
+drouichi@pc-dg-039-03:~/R1.04$ gedit ~/R1.04/pub/tp-fichiers/Proverbes.txt
+drouichi@pc-dg-039-03:~/R1.04$ 
+
+Le fichier s'ouvre dans gedit
+
+-------------------------------------------------------------------------------------------------
+
+4.2. Lien symbolique comme "raccourci" vers un logiciel
+-----------------------------------------------------------
+
+1.
+drouichi@pc-dg-039-03:~/.local/bin$ whereis RR1.04-commande-très-longue-à-taper
+RR1.04-commande-très-longue-à-taper: /users/info/pub/bin/RR1.04-commande-très-longue-à-taper
+
+2.
+drouichi@pc-dg-039-03:~/.local/bin$ ln -s /users/info/pub/bin/RR1.04-commande-très-longue-à-taper clt
+
+drouichi@pc-dg-039-03:~/.local/bin$ ls -l
+total 16
+-rwxr-xr-x 1 drouichi infobut1  97 13 oct.  17:44 archivage
+-rwxr-xr-x 1 drouichi infobut1 110 13 oct.  17:42 archivage~
+lrwxrwxrwx 1 drouichi infobut1  57 13 oct.  18:07 clt -> /users/info/pub/bin/RR1.04-commande-très-longue-à-taper
+-rwxr-xr-x 1 drouichi infobut1  32 11 oct.  11:36 essai-script
+-rw-r--r-- 1 drouichi infobut1   0 11 oct.  11:35 essai-script~
+-rwxr-xr-x 1 drouichi infobut1  52 11 oct.  11:42 script-param
+-rw-r--r-- 1 drouichi infobut1   0 11 oct.  11:34 script-param~
+
+--------------------------------------------------------------------------------------------------
+
+4.3. Lien symbolique pour contrôler des versions de logiciels
+-------------------------------------------------------------------
+
+1.
+drouichi@pc-dg-039-03:~$ /usr/lib/jvm/java-17-openjdk-amd64/bin/java -version
+openjdk version "17.0.8" 2023-07-18
+OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
+OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
+
+drouichi@pc-dg-039-03:~$ /usr/lib/jvm/java-21-openjdk-amd64/bin/java -version
+openjdk version "21" 2023-09-19
+OpenJDK Runtime Environment (build 21+35-Debian-1)
+OpenJDK 64-Bit Server VM (build 21+35-Debian-1, mixed mode, sharing)
+
+2.
+1. drouichi@pc-dg-039-03:~$ java -version
+openjdk version "17.0.8" 2023-07-18
+OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
+OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
+
+2. 
+java --> /usr/bin/java
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

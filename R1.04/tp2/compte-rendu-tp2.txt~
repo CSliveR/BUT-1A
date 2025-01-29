@@ -1,0 +1,271 @@
+***********************************************
+DROUICHE Ilyès- TP2: Jokers, Processus, alias du shell, fichiers cachés
+***********************************************
+
+2. Introduction : shell et système de fichiers
+==============================================
+
+Noter ici les choses dont vous aurez du mal à vous souvenir.
+
+
+
+3. Manipuler plusieurs fichiers en une seule commande
+======================================================
+
+1. 
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ cp *.java ~/R1.04/tp2
+
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ cd -
+/users/info/etu-1a/drouichi/R1.04/tp2
+
+drouichi@pc-dg-025-03:~/R1.04/tp2$ ls
+compte-rendu-tp2.txt  Essai.java  Prg.java
+
+2.
+drouichi@pc-dg-025-03:~/R1.04/tp2$ cd -
+/users/info/pub/1a/R1.04/tp-fichiers
+
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ ls -l
+total 80
+-rw-r--r-- 1 bonnaudl info 14859  9 sept.  2013 Avare.txt
+drwxr-xr-x 2 bonnaudl info  4096 11 oct.   2021 dossier
+-rw-r--r-- 1 bonnaudl info   413 30 sept.  2021 Essai.class
+-rw-r--r-- 1 bonnaudl info   131 30 sept.  2021 Essai.java
+-rwxr-xr-x 1 bonnaudl info    17 25 oct.   2021 essai-script
+-rw-r--r-- 1 bonnaudl info   430  8 oct.   2021 Prg.class
+-rw-r--r-- 1 bonnaudl info   153  3 oct.   2021 Prg.java
+-rw-r--r-- 1 bonnaudl info   282  3 oct.   2021 Proverbes.txt
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto1
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto2
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto3
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto4
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto5
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto6
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto7
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto8
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto9
+
+
+3.
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ cp P* ~/R1.04/tp2
+
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ cd -
+/users/info/etu-1a/drouichi/R1.04/tp2
+
+drouichi@pc-dg-025-03:~/R1.04/tp2$ ls 
+compte-rendu-tp2.txt  Essai.java  Prg.class  Prg.java  Proverbes.txt
+
+4.
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ cp toto[2,4,6,8] ~/R1.04/tp2
+
+drouichi@pc-dg-025-03:/users/info/pub/1a/R1.04/tp-fichiers$ cd -
+/users/info/etu-1a/drouichi/R1.04/tp2
+
+drouichi@pc-dg-025-03:~/R1.04/tp2$ ls
+compte-rendu-tp2.txt  Essai.java  Prg.class  Prg.java  Proverbes.txt  toto2  toto4  toto6  toto8
+
+----------------------------------------------------------------------------------------------------
+
+4.Processus
+=============
+
+4.1. Arborescence des processus
+----------------------------------
+1.2.
+
+drouichi@pc-dg-025-03:~$ pstree -u
+[...]
+─2*[konsole─┬─bash]
+            └─7*[{konsole}]]
+        ├─konsole─┬─bash───pstree
+        └─7*[{konsole}]
+[...]
+
+
+1. Les attributs listés sont: UID, PID, PPID, C, STIME, TTY, TIME et CMD avec ps -ef
+
+2. Les attributs listés sont: USER, PID, %CPU, %MEM, VSZ, RSS, TTY, STAT, START, TIME, COMMAND avec ps aux.
+
+3.
+UID          PID    PPID  C STIME TTY          TIME CMD
+drouichi   41371       1  0 09:59 ?        00:00:00 /lib/systemd/systemd --user
+drouichi   41372   41371  0 09:59 ?        00:00:00 (sd-pam)
+drouichi   41394   41371  0 09:59 ?        00:00:00 /usr/bin/pipewire
+drouichi   41395   41371  0 09:59 ?        00:00:00 /usr/bin/pulseaudio --daemonize=no --log-target=journal
+drouichi   41397   41371  0 09:59 ?        00:00:00 /usr/bin/wireplumber
+drouichi   41399   41371  0 09:59 ?        00:00:00 /usr/bin/gnome-keyring-daemon --foreground --components=pkcs11,s
+drouichi   41400   41371  0 09:59 ?        00:00:02 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nop
+drouichi   41414   41371  0 09:59 ?        00:00:00 /usr/libexec/gvfsd
+drouichi   41421   41371  0 09:59 ?        00:00:00 /usr/libexec/gvfsd-fuse /run/user/107387/gvfs -f
+drouichi   41422   41349  0 09:59 ?        00:00:00 /usr/bin/startplasma-x11
+drouichi   41547   41422  0 09:59 ?        00:00:00 /usr/bin/ssh-agent /usr/bin/startplasma-x11
+drouichi   41564   41395  0 09:59 ?        00:00:00 /usr/libexec/pulse/gsettings-helper
+drouichi   41586   41371  0 09:59 ?        00:00:01 /usr/libexec/tracker-miner-fs-3
+drouichi   41593   41371  0 09:59 ?        00:00:00 /usr/libexec/gvfs-udisks2-volume-monitor
+drouichi   41598   41371  0 09:59 ?        00:00:00 /usr/libexec/gvfs-goa-volume-monitor
+drouichi   41602   41371  0 09:59 ?        00:00:00 /usr/libexec/goa-daemon
+[...]
+
+4.
+Liens de filiation ?
+
+6.
+Le logiciel top affiche les processus qui tournent sur la machine tant que la commande n'est pas quittée alors que le logiciel ps affiche les processus au moment où la commande est exécutée. 
+
+
+----------------------------------------------------------------------------------------------------
+
+
+4.2. Processus en avant plan, en arrière plan, suspendu
+---------------------------------------------------------
+
+3.
+Après la commande fg, le programme reprend à l'endroit où il a été suspendu.
+
+4.
+Après la commande bg, le programme reprend à l'endroit où il a été suspendu en arrière plan et il faut repasser le logiciel en avant plan pour pouvoir effectuer des actions dessus.
+
+
+1.
+drouichi@pc-dg-025-03:~$ kcalc
+
+2.
+drouichi@pc-dg-025-03:~$ kcalc
+^Z
+[5]+  Stopped                 kcalc
+
+Kcalc devient inutilisable.
+
+3.
+drouichi@pc-dg-025-03:~$ kcalc &
+[6] 75516
+
+----------------------------------------------------------------------------------------------------
+
+4.3. Tuer un processus
+-------------------------
+
+1.
+"End Process" dans plasma-systemmonitor pour tuer un processus.
+
+2.
+drouichi@pc-dg-025-03:~$ kcalc &
+[3] 78545
+
+drouichi@pc-dg-025-03:~$ kill -9 78545
+
+4.4. Fermeture d'un terminal
+--------------------------------
+
+1.
+drouichi@pc-dg-027-05:~$ kcalc &
+[1] 117142
+
+
+2.
+drouichi@pc-dg-027-05:~$ ps 
+    PID TTY          TIME CMD
+ 115268 pts/3    00:00:00 bash
+ 117142 pts/3    00:00:00 kcalc
+ 117250 pts/3    00:00:00 ps
+
+drouichi@pc-dg-027-05:~$ pstree
+[...]
+├─konsole─┬─bash─┬─kcalc───11*[{kcalc}]
+[...]
+
+Le processus père du processus kcalc est le processus bash.
+
+4.
+drouichi@pc-dg-027-05:~$ pstree
+[...]
+─systemd─┬─(sd-pam)
+        │         ├─agent───2*[{agent}]
+        │         ├─at-spi-bus-laun─┬─dbus-daemon
+        │         │                 └─3*[{at-spi-bus-laun}]
+        │         ├─at-spi2-registr───2*[{at-spi2-registr}]
+        │         ├─dbus-daemon
+        │         ├─dconf-service───2*[{dconf-service}]
+        │         ├─evolution-addre───5*[{evolution-addre}]
+        │         ├─evolution-alarm───6*[{evolution-alarm}]
+        │         ├─evolution-calen───8*[{evolution-calen}]
+        │         ├─evolution-sourc───3*[{evolution-sourc}]
+        │         ├─gcr-ssh-agent───{gcr-ssh-agent}
+        │         ├─gmenudbusmenupr───2*[{gmenudbusmenupr}]
+        │         ├─gnome-keyring-d───3*[{gnome-keyring-d}]
+        │         ├─goa-daemon───4*[{goa-daemon}]
+        │         ├─goa-identity-se───2*[{goa-identity-se}]
+        │         ├─gvfs-afc-volume───3*[{gvfs-afc-volume}]
+        │         ├─gvfs-goa-volume───2*[{gvfs-goa-volume}]
+        │         ├─gvfs-gphoto2-vo───2*[{gvfs-gphoto2-vo}]
+        │         ├─gvfs-mtp-volume───2*[{gvfs-mtp-volume}]
+        │         ├─gvfs-udisks2-vo───3*[{gvfs-udisks2-vo}]
+        │         ├─gvfsd───2*[{gvfsd}]
+        │         ├─gvfsd-fuse───5*[{gvfsd-fuse}]
+        │         ├─gvfsd-metadata───2*[{gvfsd-metadata}]
+        │         ├─kaccess───7*[{kaccess}]
+        │         ├─kactivitymanage───5*[{kactivitymanage}]
+        │         ├─kcalc───7*[{kcalc}]
+        │         ├─kded5───13*[{kded5}]
+        │         ├─kglobalaccel5───2*[{kglobalaccel5}]
+        │         ├─kscreen_backend───2*[{kscreen_backend}]
+[...]
+
+Le processus père de kcal est le processus systemd.
+
+6.
+La fenêtre gedit s'est fermée avec la fenêtre du terminal.
+
+----------------------------------------------------------------------------------------------------
+
+5. Utilisation efficace du shell
+=================================
+
+5.1. Définir des raccourcis (alias) dans le shell
+---------------------------------------------------
+
+drouichi@pc-dg-027-05:~$ alias l="ls -l"
+
+drouichi@pc-dg-027-05:~$ l 
+total 44
+drwxr-xr-x 4 drouichi infobut1 4096  8 sept. 13:15 Desktop
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Documents
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Downloads
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Music
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Pictures
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Public
+drwxr-xr-x 5 drouichi infobut1 4096 20 sept. 08:06 R1.01
+drwxr-xr-x 4 drouichi infobut1 4096 20 sept. 10:13 R1.04
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Templates
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 10:50 toto
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Videos
+
+5.2. Rendre les alias "permanents"
+-------------------------------------
+
+9.
+drouichi@pc-dg-027-05:~/R1.04/tp2$ alias
+alias grep='grep --color=auto'
+alias l='ls -l'
+alias la='ls -a'
+alias ll='ls -la'
+alias ls='ls --color=auto'
+alias pst='ps -f -u drouichi'
+alias rm='rm -i'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

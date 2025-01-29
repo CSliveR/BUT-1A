@@ -1,0 +1,557 @@
+***********************************************
+DROUICHE Ilyès- TP1 : Prise en main du shell
+***********************************************
+
+2. Introduction : shell et système de fichiers
+==============================================
+
+Noter ici les choses dont vous aurez du mal à vous souvenir.
+
+
+3. Utilisation de la ligne de commande
+======================================
+
+3.1 Lancer un shell
+-------------------
+
+1.
+
+drouichi@pc-dg-033-11:~$ pwd
+/users/info/etu-1a/drouichi
+
+2. 
+
+Le chemin affiché est celui de mon dossier personnel (ou homedir)
+
+3.
+
+Il s'agit du même chemin que celui affiché par Dolphin.
+
+4.
+
+drouichi@pc-dg-033-11:~$ echo ~
+/users/info/etu-1a/drouichi
+
+5.
+
+Le chemin affiché est celui de mon homedir.
+
+-------------------------------------------------------------------------
+
+
+3.2 Commandes et paramètres
+----------------------------
+
+1.
+
+drouichi@pc-dg-033-11:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  R1.01  R1.04  Templates  Videos
+
+2.
+
+Oui, mon répertoire R1.04 existe.
+
+3.                                          4.
+
+drouichi@pc-dg-033-11:~$ ls R1.04    ->     chemin relatif
+tp1
+drouichi@pc-dg-033-11:~$ ls ~/R1.04   ->    chemin absolu
+tp1
+drouichi@pc-dg-033-11:~$ ls ./R1.04    ->   chemin relatif 
+tp1
+drouichi@pc-dg-033-11:~$ ls /users/info/etu-1a/drouichi/R1.04 ->  chemin absolu
+tp1
+
+--------------------------------------------------------------------------------------
+
+
+3.3 Sensibilité à la casse et messages d'erreur
+--------------------------------------------------
+
+1. 2. 
+
+drouichi@pc-dg-033-11:~$ ls r1.04
+ls: cannot access 'r1.04': No such file or directory
+
+3.4.
+
+drouichi@pc-dg-033-11:~$ LS
+bash: LS: command not found
+drouichi@pc-dg-033-11:~$ Ls
+bash: Ls: command not found
+
+5.
+
+drouichi@pc-dg-033-11:~$ sl
+
+Animation d'un train en marche sur l'écran.
+
+--------------------------------------------------------------------------------------
+
+3.4 Édition de la ligne de commande
+-------------------------------------
+
+3. 
+
+La souris ne permet pas de déplacer le curseur.
+
+--------------------------------------------------------------------------------------
+
+3.5 Complétion automatique
+----------------------------
+
+1.
+
+drouichi@pc-dg-033-11:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  R1.01  R1.04  Templates  Videos
+
+3.
+
+Le nom du répertoire toto est complété automatiquement.
+drouichi@pc-dg-033-11:~$ ls toto/
+
+4.
+
+Tous les répertoires commençant par "R1.0" sont listés. 
+
+drouichi@pc-dg-033-11:~$ ls R1.0
+R1.01/ R1.04/ 
+
+5. 6.
+
+drouichi@pc-dg-033-11:~$ RR1.04-commande-très-longue-à-taper 
+
+--------------------------------------------------------------------------------------
+
+3.6 Historique du shell
+----------------------------
+
+1. 2. 3.
+
+drouichi@pc-dg-033-11:~$ echo "bonjour"
+bonjour
+
+4.
+
+drouichi@pc-dg-033-11:~$ history
+[...]
+116  echo ~
+138  echo "bonjour"
+[...]
+
+5.
+
+On trouve 2 commandes echo.
+
+--------------------------------------------------------------------------------------
+
+3.7 Interruption d’une commande par Ctrl-c
+--------------------------------------------
+
+1.2.
+
+drouichi@pc-dg-033-11:~$ boucle-infinie
+0
+1
+[...]
+22
+^C
+drouichi@pc-dg-033-11:~$ 
+
+
+3.
+
+drouichi@pc-dg-033-11:~$ kcalc
+^C
+drouichi@pc-dg-033-11:~$ 
+
+4. 
+
+Le logiciel KCalc se ferme.
+
+--------------------------------------------------------------------------------------
+
+3.8 Lancement d’une commande en arrière plan (&)
+----------------------------------------------------
+
+1.2.
+
+drouichi@pc-dg-033-11:~$ kcalc &
+[1] 68956
+
+3.
+
+Oui, le shell est encore utilisable.
+
+drouichi@pc-dg-033-11:~$ kcalc &
+[1] 68956
+drouichi@pc-dg-033-11:~$ echo "bonjour"
+bonjour
+
+4. Commandes Unix/Linux de base 
+==============================================
+
+4.1 Documentation en ligne (man)
+-----------------------------------
+
+3.
+
+drouichi@pc-dg-033-11:~$ man ls 
+[...]
+-l     use a long listing format
+[...]
+
+drouichi@pc-dg-033-11:~$ man-fr ls      (uniquement sur les machines de l'IUT2)
+[...]
+-l     utiliser un format d'affichage long
+[...]
+
+
+4.
+
+La commande fait bien ce qui est indiqué dans la doc.
+
+drouichi@pc-dg-033-11:~$ ls -l
+total 44
+drwxr-xr-x 4 drouichi infobut1 4096  8 sept. 13:15 Desktop
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Documents
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Downloads
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Music
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Pictures
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Public
+drwxr-xr-x 4 drouichi infobut1 4096 13 sept. 08:04 R1.01
+drwxr-xr-x 3 drouichi infobut1 4096 13 sept. 11:23 R1.04
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Templates
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 10:50 toto
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Videos
+
+-------------------------------------------------------------------------------------------
+
+4.2 Opérations sur les répertoires
+---------------------------------------
+
+Opérations de base
+--------------------
+
+drouichi@pc-dg-033-11:~$ pwd
+/users/info/etu-1a/drouichi
+
+drouichi@pc-dg-033-11:~$ ls -l
+total 44
+drwxr-xr-x 4 drouichi infobut1 4096  8 sept. 13:15 Desktop
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Documents
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Downloads
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Music
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Pictures
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Public
+drwxr-xr-x 4 drouichi infobut1 4096 13 sept. 08:04 R1.01
+drwxr-xr-x 3 drouichi infobut1 4096 13 sept. 11:28 R1.04
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Templates
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 10:50 toto
+drwxr-xr-x 2 drouichi infobut1 4096  5 sept. 13:29 Videos
+
+drouichi@pc-dg-033-11:~$ ls -l R1.04
+total 12
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 10:30 tp1
+
+drouichi@pc-dg-033-11:~$ cd R1.04
+
+drouichi@pc-dg-033-11:~/R1.04$ pwd
+/users/info/etu-1a/drouichi/R1.04
+
+
+drouichi@pc-dg-033-11:~/R1.04$ ls -l
+total 12
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 10:30 tp1
+
+drouichi@pc-dg-033-11:~/R1.04$ cd ..
+
+drouichi@pc-dg-033-11:~$ pwd
+/users/info/etu-1a/drouichi
+
+drouichi@pc-dg-033-11:~$ cd R1.04
+
+drouichi@pc-dg-033-11:~/R1.04$ pwd
+/users/info/etu-1a/drouichi/R1.04
+
+drouichi@pc-dg-033-11:~/R1.04$ mkdir toto
+
+drouichi@pc-dg-033-11:~/R1.04$ cd toto
+
+drouichi@pc-dg-033-11:~/R1.04/toto$ pwd
+/users/info/etu-1a/drouichi/R1.04/toto
+
+drouichi@pc-dg-033-11:~/R1.04/toto$ cd
+
+drouichi@pc-dg-033-11:~$ pwd
+/users/info/etu-1a/drouichi
+
+drouichi@pc-dg-033-11:~$ cd R1.04/toto
+
+drouichi@pc-dg-033-11:~/R1.04/toto$ pwd
+/users/info/etu-1a/drouichi/R1.04/toto
+
+drouichi@pc-dg-033-11:~/R1.04/toto$ ls -l ..
+total 16
+-rw-r--r-- 1 drouichi infobut1 4790 13 sept. 11:28 compte-rendu-tp1.txt
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 11:29 toto
+drwxr-xr-x 2 drouichi infobut1 4096 13 sept. 10:30 tp1
+
+drouichi@pc-dg-033-11:~/R1.04/toto$ cd ../..
+
+drouichi@pc-dg-033-11:~$ pwd
+/users/info/etu-1a/drouichi
+
+--------------------------------------------------------------------------------
+
+Supprimer un répertoire vide
+------------------------------
+
+3.
+
+drouichi@pc-dg-033-11:~/R1.04$ rmdir toto
+
+4.
+
+drouichi@pc-dg-033-11:~/R1.04$ ls
+toto  tp1
+
+La commande rmdir supprime le répertoire toto
+
+drouichi@pc-dg-033-11:~/R1.04$ ls
+tp1
+
+--------------------------------------------------------------------------------
+
+Supprimer un répertoire non vide
+------------------------------------
+
+1.
+
+drouichi@pc-dg-033-11:~/R1.04$ mkdir rep1
+drouichi@pc-dg-033-11:~/R1.04$ mkdir rep1/rep2
+drouichi@pc-dg-033-11:~/R1.04$ rmdir rep1
+rmdir: failed to remove 'rep1': Directory not empty
+
+2.
+
+rmdir: failed to remove 'rep1': Directory not empty
+
+3.4.
+
+drouichi@pc-dg-033-11:~/R1.04$ ls
+rep1  tp1
+drouichi@pc-dg-033-11:~/R1.04$ rm -r rep1
+drouichi@pc-dg-033-11:~/R1.04$ ls
+tp1
+
+--------------------------------------------------------------------------------
+
+4.3 Opérations sur les fichiers
+-----------------------------------
+
+drouichi@pc-dg-039-01:~$ ls -l /users/info/pub/1a/R1.04/tp-fichiers/
+total 80
+-rw-r--r-- 1 bonnaudl info 14859  9 sept.  2013 Avare.txt
+drwxr-xr-x 2 bonnaudl info  4096 11 oct.   2021 dossier
+-rw-r--r-- 1 bonnaudl info   413 30 sept.  2021 Essai.class
+-rw-r--r-- 1 bonnaudl info   131 30 sept.  2021 Essai.java
+-rwxr-xr-x 1 bonnaudl info    17 25 oct.   2021 essai-script
+-rw-r--r-- 1 bonnaudl info   430  8 oct.   2021 Prg.class
+-rw-r--r-- 1 bonnaudl info   153  3 oct.   2021 Prg.java
+-rw-r--r-- 1 bonnaudl info   282  3 oct.   2021 Proverbes.txt
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto1
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto2
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto3
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto4
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto5
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto6
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto7
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto8
+-rw-r--r-- 1 bonnaudl info    14  4 oct.   2021 toto9
+
+drouichi@pc-dg-039-01:~$ cp /users/info/pub/1a/R1.04/tp-fichiers/Avare.txt R1.04/tp1/
+
+drouichi@pc-dg-039-01:~$ cd R1.04/tp1/
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ ls -l
+total 24
+-rw-r--r-- 1 drouichi infobut1 14859 13 sept. 17:36 Avare.txt
+-rw-r--r-- 1 drouichi infobut1  8029 13 sept. 11:48 compte-rendu-tp1.txt
+
+Les 4 premières commandes copient le fichier Avare.txt dans le répertoire ~/R1.04/tp1/
+
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ cat Avare.txt 
+
+permet de visualiser le fichier entier sur le shell courant.
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ more Avare.txt
+
+permet de visualiser le début du fichier sur le shell courant.
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ less Avare.txt
+
+permet de visualiser le fichier sur une autre fenêtre dans le shell.
+
+ 
+drouichi@pc-dg-039-01:~/R1.04/tp1$ rm Avare.txt 
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ ls -l
+total 12
+-rw-r--r-- 1 drouichi infobut1 9827 13 sept. 17:53 compte-rendu-tp1.txt
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ rm Avare.txt 
+permet de supprimer le fichier du répertoire courant.
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ cp /users/info/pub/1a/R1.04/tp-fichiers/Avare.txt .
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ ls -l
+total 28
+-rw-r--r-- 1 drouichi infobut1 14859 13 sept. 17:58 Avare.txt
+-rw-r--r-- 1 drouichi infobut1  9827 13 sept. 17:53 compte-rendu-tp1.txt
+
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ mv Avare.txt ..
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ cd ..
+drouichi@pc-dg-039-01:~/R1.04$ ls -l
+total 20
+-rw-r--r-- 1 drouichi infobut1 14859 13 sept. 17:58 Avare.txt
+drwxr-xr-x 2 drouichi infobut1  4096 13 sept. 17:58 tp1
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ mv Avare.txt .. 
+permet de déplacer le fichier dans le réperoire père 
+
+drouichi@pc-dg-039-01:~/R1.04$ mv Avare.txt Avare-1.0.txt
+
+drouichi@pc-dg-039-01:~/R1.04$ ls -l
+total 20
+-rw-r--r-- 1 drouichi infobut1 14859 13 sept. 17:58 Avare-1.0.txt
+drwxr-xr-x 2 drouichi infobut1  4096 13 sept. 17:58 tp1
+
+
+drouichi@pc-dg-039-01:~/R1.04$ mv Avare.txt Avare-1.0.txt
+permet de renommer le fichier Avare.txt en Avare-1.0.txt
+
+--------------------------------------------------------------------------------
+
+5. Commandes pour la programmation en Java
+==========================================
+
+drouichi@pc-dg-039-01:~/R1.04/tp1$ cp /users/info/pub/1a/R1.04/tp-fichiers/Essai.java .
+drouichi@pc-dg-039-01:~/R1.04/tp1$ ls -l
+total 16
+-rw-r--r-- 1 drouichi infobut1 11090 13 sept. 18:11 compte-rendu-tp1.txt
+-rw-r--r-- 1 drouichi infobut1   131 13 sept. 18:13 Essai.java
+drouichi@pc-dg-039-01:~/R1.04/tp1$ javac Essai.java 
+drouichi@pc-dg-039-01:~/R1.04/tp1$ ls -l
+total 20
+-rw-r--r-- 1 drouichi infobut1 11090 13 sept. 18:11 compte-rendu-tp1.txt
+-rw-r--r-- 1 drouichi infobut1   413 13 sept. 18:14 Essai.class
+-rw-r--r-- 1 drouichi infobut1   131 13 sept. 18:13 Essai.java
+drouichi@pc-dg-039-01:~/R1.04/tp1$ java Essai 
+Bonjour !
+drouichi@pc-dg-039-01:~/R1.04/tp1$ javac Essai.java 
+drouichi@pc-dg-039-01:~/R1.04/tp1$ java Essai 
+Bonjour, Ilyès !
+
+----------------------------------------------------------------------------------
+
+6. Questions de synthèse
+==========================
+
+6.1 Commandes de base
+------------------------
+
+1. le prompt
+
+2. La commande pwd permet d'afficher le nom du répertoire courant.
+
+3. cd ~ permet de revenir à notre homedir.
+
+Opération              Fichier           Répertoire
+                    
+Afficher le contenu 	less,cat,more	  ls, ls -l
+
+Créer 			touch		mkdir
+	
+Supprimer 		rm		rmdir, rm -r		
+
+Copier 			cp		cp		
+
+Déplacer		mv		mv 		
+
+Renommer 		mv		mv
+
+----------------------------------------------------------------------------------
+
+6.2 Désignation de fichiers
+------------------------------
+
+1. Nom d'utilsateur: drouichi
+
+2. Nom absolu de mon homedir: /users/info/etu-1a/drouichi
+
+3.
+                              Fichier exo1.java     Fichier exo2.java     Répertoire tp01
+chemin d'accès absolu 
+complet depuis la racine      ~/Rx.y/tp01/exo1.java   ~/exo2.java          ~/Rx.y/tp01/
+du système de fichiers
+
+Chemin d'accès absolu abrégé
+utilisant l'abréviation ~      ~/Rx.y/tp01/exo1.java   ~/exo2.java 	  ~/Rx.y/tp01/
+
+Chemin d'accès relatif en 
+supposant que le répertoire     /Rx.y/tp01/exo1.java 	/exo2.java 	  /Rx.y/tp01/
+courant est votre homedir ~
+
+Chemin d'accès relatif en 
+supposant que le répertoire    tp01/exo1.java           ../exo2.java    tp01
+courant est ~/Rx.y
+
+Chemin d'accès relatif en 
+supposant que le répertoire  	exo1.java               ../../exo2.java    .
+courant est ~/Rx.y/tp01
+
+4.
+
+Répertoire courant 	Commande la plus rapide à taper
+
+~/ 			mv exo2.java Rx.y/tp01			
+~/Rx.y/ 		mv ../exo2.java tp01
+~/Rx.y/tp01/		mv ../../exo2.java .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

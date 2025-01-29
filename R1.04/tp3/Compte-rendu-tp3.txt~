@@ -1,0 +1,413 @@
+ ***********************************************
+DROUICHE Ilyès- TP3:  Redirections, filtres, recherches
+***********************************************
+
+2.Redirections d'entrées/sorties, filtres
+==============================================
+
+drouichi@pc-dg-027-05:~/R1.04/tp3$ cp -r /users/info/pub/1a/R1.04/tp-filtres/ .
+
+
+2.2 Redirection des entrées/sorties
+------------------------------------------
+
+1.
+drouichi@pc-dg-027-05:~/R1.04/tp3$ ls -l > trace
+drouichi@pc-dg-027-05:~/R1.04/tp3$ ls
+Compte-rendu-tp3.txt  Compte-rendu-tp3.txt~  tp-filtres  trace
+
+2.
+drouichi@pc-dg-027-05:~/R1.04/tp3$ cat trace
+total 12
+-rw-r--r-- 1 drouichi infobut1  157 27 sept. 10:21 Compte-rendu-tp3.txt
+-rw-r--r-- 1 drouichi infobut1    2 27 sept. 10:20 Compte-rendu-tp3.txt~
+drwxr-xr-x 2 drouichi infobut1 4096 27 sept. 10:22 tp-filtres
+-rw-r--r-- 1 drouichi infobut1    0 27 sept. 10:23 trace
+
+3.
+drouichi@pc-dg-027-05:~/R1.04/tp3$ ps >> trace
+
+4.
+drouichi@pc-dg-027-05:~/R1.04/tp3$ cat trace
+total 12
+-rw-r--r-- 1 drouichi infobut1  157 27 sept. 10:21 Compte-rendu-tp3.txt
+-rw-r--r-- 1 drouichi infobut1    2 27 sept. 10:20 Compte-rendu-tp3.txt~
+drwxr-xr-x 2 drouichi infobut1 4096 27 sept. 10:22 tp-filtres
+-rw-r--r-- 1 drouichi infobut1    0 27 sept. 10:23 trace
+    PID TTY          TIME CMD
+   3698 pts/4    00:00:00 bash
+  51883 pts/4    00:00:00 ps
+
+5.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ cat mots
+réseau
+bases de données
+programmation
+informatique
+système
+modélisation
+
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ cat mots | sort
+bases de données
+informatique
+modélisation
+programmation
+réseau
+système
+
+-----------------------------------------------------------------------------------------------
+
+2.3. Filtres 
+---------------
+Travail préparatoire
+1.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ getent passwd 
+[...]
+sierrana:*:106968:8500:SIERRA NETZER Angela:/users/geav/profs/sierrana:/bin/bash
+campante:*:106969:9500:CAMPANT Eva:/users/doc/campante:/bin/bash
+selmek:*:107017:212005:SELME Kelyan:/users/info/etu-3a/selmek:/bin/bash
+seignovm:*:106986:212005:SEIGNOVERT Maxime:/users/info/etu-3a/seignovm:/bin/bash
+[...]
+
+2.
+La commande affiche le NOM et prénom ainsi que le chemin absolu du homedir de l'étudiant.
+
+
+Travail à réaliser
+1.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ cat liste1a
+getent passwd | grep '/users/info/etu-1a/'
+
+Le filtre grep est utilisé 
+
+2.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a | wc -l
+151
+
+3.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a | head -3 ou ./liste1a | head -n -3
+akopiane:*:105021:212001:AKOPIAN Edwin:/users/info/etu-1a/akopiane:/bin/bash
+bardia:*:104965:212001:BARDI Amyn:/users/info/etu-1a/bardia:/bin/bash
+braitita:*:106912:212001:BRAITIT AYMAN:/users/info/etu-1a/braitita:/bin/bash
+
+4.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a | tail -3 ou ./liste1a | tail -n -3 
+faurelu:*:107283:212001:FAURE Lukas:/users/info/etu-1a/faurelu:/bin/bash
+francoue:*:107284:212001:FRANCOU Eddy:/users/info/etu-1a/francoue:/bin/bash
+mbelondm:*:109244:212001:MBELO NDRIAMANAMPY Manohisoa:/users/info/etu-1a/mbelondm:/bin/bash
+
+5.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ cat liste1a-vrais
+getent passwd | grep '/users/info/etu-1a/' | grep -v 'iutdeuxt'
+
+option -v du filtre grep.
+
+6.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ cat liste1a-vrais-noms
+getent passwd | grep '/users/info/etu-1a/' | grep -v 'iutdeuxt' | cut -d':' -f5
+
+-d -> délimiteur donc -d':' -> le délimiteur est ':'
+-f -> field (hatake) donc -f5 -> 5ème champ
+
+9.drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | sort
+ADAM Esteban
+AKOPIAN Edwin
+ALLEGRE Bastien
+AMBERNY Peran
+[...]
+
+10.11.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | cut -d' ' -f2
+Edwin
+Amyn
+[...]
+Ilyes
+[...]
+
+12.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | cut -d' ' -f2 | sort
+Adam
+Adam
+Adam
+Adrien
+Adrien
+Aimery
+[...]
+
+13.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | cut -d' ' -f2 | sort | uniq
+Adam
+Adrien
+Aimery
+[...]
+
+14. 
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | cut -d' ' -f2 | sort | uniq -c -d
+      3 Adam
+      2 Adrien
+      2 Antonin
+      2 Axel
+      2 Bastien
+      2 Brayan
+      2 Eliot
+      2 Jules
+      2 Kenzo
+      2 Lea
+      3 Lucas
+      2 Nael
+      2 Nils
+      3 Nolan
+      3 Paul
+      3 Thomas
+      2 Tristan
+      2 Valentin
+15.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | cut -d' ' -f2 | sort | uniq -c -d | sort -r
+      3 Thomas
+      3 Paul
+      3 Nolan
+      3 Lucas
+      3 Adam
+      2 Valentin
+      2 Tristan
+      2 Nils
+      2 Nael
+      2 Lea
+      2 Kenzo
+      2 Jules
+      2 Eliot
+      2 Brayan
+      2 Bastien
+      2 Axel
+      2 Antonin
+      2 Adrien
+16.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ ./liste1a-vrais-noms | cut -d' ' -f2 | sort | uniq -c -d | sort -r | head
+      3 Thomas
+      3 Paul
+      3 Nolan
+      3 Lucas
+      3 Adam
+      2 Valentin
+      2 Tristan
+      2 Nils
+      2 Nael
+      2 Lea
+17.
+drouichi@pc-dg-027-05:~/R1.04/tp3/tp-filtres$ getent passwd | grep '/users/info/etu/' | grep -v 'iutdeuxt' | cut -d':' -f5 | ./liste1a-vrais-noms | cut -d' ' -f2 | sort | uniq -c -d | sort -r | head
+      3 Thomas
+      3 Paul
+      3 Nolan
+      3 Lucas
+      3 Adam
+      2 Valentin
+      2 Tristan
+      2 Nils
+      2 Nael
+      2 Lea
+
+-------------------------------------------------------------------------------------------------
+
+3.Recherche et indexation de fichiers
+==============================================
+
+3.1.Recherche de pages de manuel et de logiciels
+--------------------------------------------------
+
+1.
+drouichi@pc-dg-037-03:~$ man -k PDF
+a2ping (1)           - - convert between PS, EPS and PDF and other page description formats
+a5toa4 (1)           - arrange A5 pages in a PDF onto A4 landscape paper
+afmtodit (1)         - create font files for use with groff -Tps and -Tpdf
+AMC-mailing (1)      - mail PDF annotated completed answer sheets to students
+auto-multiple-choice-mailing (1) - mail PDF annotated completed answer sheets to students
+axohelp (1)          - helper program for use of LaTeX package axodraw2 with pdflatex.
+doc2pdf (1)          - convert any document from and to any LibreOffice supported format
+[...]
+
+
+2.
+drouichi@pc-dg-037-03:~$ man -k java 
+Log::Log4perl::JavaMap::SyslogAppender (3pm) - wraps Log::Dispatch::Syslog
+acorn (1)            - parse JavaScript file
+ant (1)              - a Java based make tool.
+babeljs (1)          - The compiler for writing next generation JavaScript
+babeljs-7 (1)        - The compiler for writing next generation JavaScript
+c++filt (1)          - demangle C++ and Java symbols
+DateTime::Locale::jv (3pm) - Locale data examples for the Javanese (jv) locale
+DateTime::Locale::jv_ID (3pm) - Locale data examples for the Javanese Indonesia (jv-ID) locale
+Debian::Javahelper::Eclipse (3) - Eclipse Helper Library.
+Debian::Javahelper::Java (3) - Javahelper core library.
+Debian::Javahelper::Manifest (3) - Javahelper representation of a Jar Manifest
+Debian::Javahelper::ManifestSection (3) - Javahelper representation of a section in a Jar Manifest
+eslint (1)           - JavaScript
+fastjar (1)          - archive tool for Java archives
+fop (1)              - Command line wrapper for the java version of fop.
+jaotc (1)            - The Java static compiler that produces native code for compiled Java methods
+jar (1)              - Manipulates Java Archive (JAR) files.
+jarsigner (1)        - Signs and verifies Java Archive (JAR) files.
+java (1)             - Launches a Java application.
+java-wrappers (7)    - capacities shared by java wrapper scripts
+javac (1)            - Reads Java class and interface definitions and compiles them into bytecode and class files.
+javadoc (1)          - Generates HTML pages of API documentation from Java source files.
+[...]
+
+3.2. Recherche de pages de manuel et de logiciels
+--------------------------------------------------
+
+1.
+drouichi@pc-dg-037-03:~$ find ~
+[...]
+/users/info/etu-1a/drouichi/Documents
+/users/info/etu-1a/drouichi/R1.04
+/users/info/etu-1a/drouichi/R1.04/Avare-1.0.txt
+/users/info/etu-1a/drouichi/R1.04/tp2
+/users/info/etu-1a/drouichi/R1.04/tp2/Essai.java
+/users/info/etu-1a/drouichi/R1.04/tp2/toto4
+/users/info/etu-1a/drouichi/R1.04/tp2/Prg.class
+/users/info/etu-1a/drouichi/R1.04/tp2/compte-rendu-tp2.txt~
+/users/info/etu-1a/drouichi/R1.04/tp2/compte-rendu-tp2.txt
+/users/info/etu-1a/drouichi/R1.04/tp2/Prg.java
+/users/info/etu-1a/drouichi/R1.04/tp2/Proverbes.txt
+/users/info/etu-1a/drouichi/R1.04/tp1
+/users/info/etu-1a/drouichi/R1.04/tp1/Essai.java
+[...]
+
+La commande affiche toutes les entrées liées à mon homedir
+
+2.
+drouichi@pc-dg-037-03:~$ find ~ | wc -l
+1410
+
+Il y a 1410 entrées présentes 
+
+3.
+drouichi@pc-dg-037-03:~$ find ~ | grep .java
+/users/info/etu-1a/drouichi/R1.01/TP3B/src/Explore_Strings.java
+/users/info/etu-1a/drouichi/R1.01/TP3A_Files/Triangle.java
+/users/info/etu-1a/drouichi/R1.01/TP3A_Files/Cercle.java
+/users/info/etu-1a/drouichi/R1.01/TP3A_Files/Rectangle.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/Exemple.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/Moi.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/Conversions.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/EsTest.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/Jeu.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/MoyenneNotes.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/ConversionsBis.java
+/users/info/etu-1a/drouichi/R1.01/TP1/src/Permutation.java
+/users/info/etu-1a/drouichi/R1.01/TP3A/src/Triangle.java
+/users/info/etu-1a/drouichi/R1.01/TP3A/src/Utilitaire.java
+/users/info/etu-1a/drouichi/R1.01/TP3A/src/Cercle.java
+/users/info/etu-1a/drouichi/R1.01/TP3A/src/Rectangle.java
+/users/info/etu-1a/drouichi/R1.01/TP3A/src/Geometrie.java
+/users/info/etu-1a/drouichi/R1.01/TP1_Files/Exemple.java
+/users/info/etu-1a/drouichi/R1.01/TP1_Files/Es.java
+/users/info/etu-1a/drouichi/R1.01/TP1_Files/EsTest.java
+/users/info/etu-1a/drouichi/R1.01/TP2B/src/Calculs.java
+/users/info/etu-1a/drouichi/R1.01/TP2B/src/Nim.java
+/users/info/etu-1a/drouichi/R1.01/TP2A/src/Meteo.java
+/users/info/etu-1a/drouichi/R1.01/TP2A/src/Localisation.java
+/users/info/etu-1a/drouichi/R1.01/TP2A/src/Calendrier.java
+/users/info/etu-1a/drouichi/R1.01/TP2A/src/Competition.java
+/users/info/etu-1a/drouichi/.local/share/RecentDocuments/Explore_Strings.java[2].desktop
+/users/info/etu-1a/drouichi/.local/share/RecentDocuments/Explore_Strings.java.desktop
+/users/info/etu-1a/drouichi/R1.04/tp2/Essai.java
+/users/info/etu-1a/drouichi/R1.04/tp2/Prg.java
+/users/info/etu-1a/drouichi/R1.04/tp1/Essai.java
+/users/info/etu-1a/drouichi/R1.04/tp1/Essai.java~
+
+4.
+drouichi@pc-dg-037-03:~$ find ~ | grep .java | wc -l
+32
+
+
+3.3. Indexation des fichiers
+------------------------------
+
+1.
+[...]
+/usr/share/scilab/contrib/toolbox_skeleton/src/java/org/scilab/contrib/toolboxskeleton/Sum.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/CircularWindow.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/Color.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/Door.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/House.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/HouseFactory.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/IWindow.java
+/usr/share/scilab/modules/external_objects_java/examples/com/foo/RectangularWindow.java
+/usr/share/scilab/modules/javasci/examples/v2/Example1.java
+[...]
+
+2.
+drouichi@pc-dg-037-03:~$ locate .java | wc -l
+2142
+
+3.
+drouichi@pc-dg-037-03:~$ locate firefox | grep /bin/
+/usr/bin/firefox-esr
+/usr/local/bin/firefox
+/usr/local/bin/firefox-release
+/usr/local/bin/firefox.real
+
+Indexation des fichiers du serveur erebus4
+
+1.
+drouichi@pc-dg-037-03:~$ ulocate Toto.java
+/users/info/pub/1a/R1.04/.repertoire-caché/rep1/rep2/Toto.java
+
+2. 
+drouichi@pc-dg-037-03:~$ ulocate places
+/users/info/etu-1a/drouichi/.local/share/user-places.xbel
+/users/info/etu-1a/drouichi/.local/share/user-places.xbel.bak
+/users/info/etu-1a/drouichi/.local/share/user-places.xbel.tbcache
+/users/info/etu-1a/drouichi/.mozilla/firefox/b4f4qauy.default-release/places.sqlite
+/users/info/etu-1a/drouichi/.mozilla/firefox/b4f4qauy.default-release/places.sqlite-wal
+
+
+3.
+drouichi@pc-dg-037-03:~$ ulocate gedit
+/users/info/etu-1a/drouichi/.config/gedit
+/users/info/etu-1a/drouichi/.config/gedit/accels
+/users/info/etu-1a/drouichi/.local/share/gedit
+/users/info/etu-1a/drouichi/.local/share/gedit/gedit-metadata.xml
+/users/info/www/intranet/enseignements/R1.02/cm/cm-1/img/logo-gedit.png
+/users/info/www/intranet/enseignements/R1.02/cm/cm-2/img/logo-gedit.png
+/users/info/www/intranet/enseignements/R1.02/cm/cm-3/img/logo-gedit.png
+/users/info/www/intranet/enseignements/R1.02/cm/cm-4/img/logo-gedit.png
+/users/info/www/intranet/enseignements/R4.02/cm/cm-1/img/logo-gedit.png
+/users/info/www/intranet/enseignements/s1101/tp01/gedit.png
+/users/info/www/intranet/enseignements/s1101/tp01/gedit_desktop.png
+/users/info/www/intranet/enseignements/s1101/tp01/gedit_menu.png
+/users/info/www/intranet/enseignements/s1101/tp01/gedit_save.png
+/users/info/www/intranet/enseignements/simo-info2/cm/cm-1/img/logo-gedit.png
+/users/info/www/intranet/enseignements/web-mi7/cm/cm-1/img/logo-gedit.png
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

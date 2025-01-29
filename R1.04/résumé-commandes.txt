@@ -1,0 +1,285 @@
+Ce fichier est à compléter avec toutes les commandes que vous verrez pendant les TP.
+Il est possible de s'inspirer des descriptions des commandes fournies dans les pages de manuel,
+que ce soit en anglais (man COMMANDE) ou en français (man-fr COMMANDE).
+Il est aussi conseillé de noter les options les plus importantes et de noter un exemple d'utilisation de chaque commande.
+
+Nom de la	Description de ce que fait la commande
+Commande
+
+cd		Change Directory
+		Change le répertoire courant
+		cd R1.04/tp1
+
+ls		list directory contents
+		Afficher le contenu de répertoires
+		ls R1.04
+
+ls -l		Affichage détaillé d'un fichier ou d'un répertoire
+		ls -l R1.04
+		ls -l toto.txt
+		
+		
+cat             concatenate  		
+		Affichage du contenu d'un fichier sur le shell courant.
+		cat toto.txt
+
+less		Affichage du contenu d'un fichier sur un autre onglet du shell
+		less toto.txt
+
+mkdir		make directory
+		Crée un nouveau répertoire vide
+		mkdir R1.04
+
+cp              Copy
+		crée une copie d'un fichier ou répertoire dans le répertoire destination 
+		cp toto.txt R1.04
+		cp R1.04 R1.01
+		
+		
+
+cp -r		Copy recursive
+		crée une copie récursive d'un fichier ou répertoire dans le répertoire destination 
+		fait une copie d'un répertoire et de son contenue dans le répertoire destination
+		cp -r toto.txt R1.04
+		cp -r R1.04 R1.01
+
+mv              move
+		déplace les fichiers ou répertoires sources dans le répertoire destination 
+		renonmme les fichiers ou répertoires sources en fichiers ou répertoires destination
+		
+		mv toto.txt R1.04
+		mv toto.txt titi.txt
+
+rm		remove 
+		supprime les fichiers et répertoires vides
+		rm toto.txt
+		rm R1.04 si R1.04 est vide
+
+rm -r           remove recursive 
+		supprime tous les fichiers et répertoires concernés par la commande
+		rm -r toto.txt
+		rm -r R1.04
+
+javac          	compile un programme java afin de l'éxécuter
+
+java		éxecute un programme java si la commande est accompagnée du nom du programme 
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+./toto		Exécution d'un programme dans le répertoire courant
+
+R*		toutes les entrées du répertoire courant qui commencent par R
+
+*.txt		toutes les entrées du répertoire courant qui finissent par .txt
+
+R1.04/tp?	toutes les entrées du répertoire R1.04 qui commencent par tp suivi de n'importe quel caractère
+
+R1.04/tp[23]	toutes les entrées du répertoire R1.04 qui commencent par tp suivi de 2 ou de 3
+
+R*/tp*	toutes les entrées des répertoires qui commencent par tp et qui sont situés dans les répertoires qui commencent par R 
+
+pstree -u       affiche l'arbre de tous les processus tournant sur le système, avec le nom de leur propriétaire
+
+ps -ef       	affiche tous les processus sous forme de liste
+ps aux 
+
+fg		suspend un processus.
+
+bg
+
+
+kcalc &         lance le logiciel kcalc en arrière plan
+gedit &		lance le logiciel gedit en arrière plan
+
+alias           commande « interne » du shell qui permet de définir des raccourcis
+alias RACCOURCI="CHAîNE QUI SERA SUBSTITUÉE AU RACCOURCI"
+alias permanent -> écrire les alias dans le fichier ~/.bash_aliases
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+LOGICIEL--help  brève documentation sur le LOGICIEL
+
+man LOGICIEL    documentation plus complète en anglais.
+
+COMMANDE > FICHIER redirige vers FICHIER tout ce que l'exécution de COMMANDE aurait dû afficher à l'écran.
+
+COMMANDE < FICHIER pour faire en sorte qu'une commande viennent chercher ses entrées dans un fichier au lieu du clavier.
+
+COMMANDE1 | COMMANDE2 tout ce que le premier processus « affichera » servira d'entrée au second.
+
+head          affiche les premières lignes d'un fichier (10 par défaut)
+
+tail          affiche les dernières d'un fichier (10 par défaut)
+
+sort          logiciel qui trie les lignes de son entrée et envoie le résultat trié vers sa sortie
+
+uniq          supprime les doublons dans un fichier texte
+
+find [RÉPERTOIRE] permet de rechercher des entrées dans un répertoire et sa descendance.
+
+locate NOM pour retrouver rapidement un fichier faisant partie du système, et dont on connaît le nom ou une partie du nom.
+
+
+
+cat : affichage et concaténation de fichiers
+
+cat [FICHIER]...
+
+cat *.java > compte-rendu.txt
+cat va lire les fichiers qui correspondent au modèle *.java et les concaténer dans le fichier compte-rendu.txt
+
+cat trace-exécution >> compte-rendu.txt
+ajoute le fichier trace-exécution à la suite du fichier compte-rendu.txt
+
+
+
+grep : sélection de lignes
+
+grep [OPTIONS] CHAîNE [FICHIER...]
+
+-c	donne seulement le nombre de lignes trouvées obéissant au critère
+-l	donne seulement le nom des fichiers où le critère a été trouvé
+-v	donne les lignes où le critère n'a pas été trouvé
+-i	ne pas tenir compte de la casse (ne pas différencier majuscules et minuscules)
+-n	pour n'afficher que les numéros des lignes trouvées
+-w	pour imposer que le motif corresponde à un mot entier d'une ligne
+
+grep -i class *.java
+
+grep est souvent utilisé à la sortie d'un tube qui lui fournit en entrée le texte à filtrer.
+ps aux | grep 'bash'
+
+
+
+cut : sélection de colonnes ou de champs
+
+cut présente 2 formes suivant que l'on sélectionne des colonnes de caractères ou que l'on distingue des champs séparés par un caractère utilisé comme séparateur de champs.
+
+Sélection de colonnes :
+cut -cSÉLECTION_COLONNES [FICHIER...]
+
+Exemples :
+
+affiche le 5ème caractère de chaque ligne du fichier : cut -c5 fichier
+affiche du 5ème au 10ème caractère : cut -c5-10 fichier
+affiche le 5ème et le 10ème caractère : cut -c5,10 fichier
+affiche à partir du 5ème (jusqu'à la fin) : cut -c5- fichier
+
+Sélection de champs :
+cut -dSÉPARATEUR -fSÉLECTION_CHAMPS [FICHIERS]
+
+-d -> delimiteur -f: field (champ)
+
+
+
+wc : comptage de caractères, mots et lignes
+
+wc permet de compter de lignes, de mots et de caractères. (ça sera affiché dans l'ordre lignes-mots-caractères si wc est utilisé sans option)
+
+Exemples :
+
+ps aux | wc -l
+pour compter le nombre de processus tournant sur le système
+wc *.java
+pour compter le nombre de caractères, de mots et de lignes de vos fichiers source Java
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+lsblk           liste les périphériques de stockage et les partitions du système.
+
+df -h           permet de connaitre l'espace disque total, occupé et l'espace libre de l'ensemble des partitions du système.
+autre logiciel similaire à df: ncdu, duf, qdirstat (logiciel graphique)
+
+quota -s        permet de vérifier le quota sur la machine.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Permission 		 Lecture(r)                             Écriture(w)                                    Exécution(x) 
+	        
+Fichier 		consulter le contenu 			modifier le contenu 				exécuter 			
+			(afficher,copier,...) 			 						(le fichier doit être un programme ou un script) 
+											
+Répertoire 		consulter la liste des entrées 		modifier la liste des entrées 			traverser le répertoire (utilisation dans un chemin 				qu’il contient(ls,...)			qu’il contient (créer une entrée, 		d’accès à une entrée)
+								renommer, supprimer)								
+			 			
+chmod g+r f1 autorise les membres du groupe de f1 à lire f1 
+chmod o-w f1 interdit aux autres d’écrire dan sf1 
+chmod go-rwx f1 interdit aux non-propriétaires tous les accès à f1 
+chmod+x f1 rend f1 exécutable			
+								 				
+
+Les scripts shell commencent toujours par #!/bin/bash
+
+1 Créer un fichier texte avec un éditeur de texte (gedit,...) 
+2 Écrire le texte du script 
+3 Rendre le fichier texte exécutable chmod +x NOM_DU_SCRIPT
+ −→ Exécuter le script depuis le répertoire où il est stocké 
+./NOM_DU_SCRIPT 
+
+−→Exécuter le script depuis n’importe quel répertoire 
+Mettre le script dans un répertoire où le shell le trouvera automatiquement
+NOM_DU_SCRIPT 
+
+Définir une variable: fichier="/tmp/toto"
+ATTENTION IL N'Y A PAS D'ESPACE !!!!
+
+"$fichier" pour utiliser la variable. echo "$fichier" affiche le contenu de la variable
+
+
+Liens symboliques
+
+ln -s /users/info/pub/1a/R1.04/ pub 
+La commande crée un lien symbolique nommé "pub" qui pointe vers le répertoire /users/info/pub/1a/R1.04 
+
+Désigner comme cela avec ls -l:
+
+drouichi@pc-dg-039-03:~/R1.04$ ls -l
+total 52
+-rw-r--r-- 1 drouichi infobut1 14859 13 sept. 17:58 Avare-1.0.txt
+lrwxrwxrwx 1 drouichi infobut1    25 13 oct.  17:50 pub -> /users/info/pub/1a/R1.04/
+[...]
+
+script-param toto 
+
+toto est le premier paramètre $1, le deuxième $2 et ainsi de suite jusqu'à $9
+
+shellcheck NOM_DE_VOTRE_SCRIPT pour vérifier la syntaxe d'un script shell.
+
+whereis RR1.04-commande-très-longue-à-taper pour localiser un script (uniquement les scripts)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...		...
