@@ -1,0 +1,7 @@
+Quel lien peut-on établir entre le nutriscore (A,B,C,D,E) et les variables nutritionnelles
+pour les produits de la famille 'en:poultry' en France ?
+
+Ilyès DROUICHE,
+Vous travaillerez en monôme.
+Vous utiliserez l'utilisateur postgresl : team_c08
+avec le mot de passe : Mai5va3o
