@@ -1,0 +1,5 @@
+Les objectifs de cette ressource sont de :
+
+Savoir concevoir et réaliser une interface utilisateur
+Savoir mettre en oeuvre une architecture MVC
+Le développement des interfaces s'effectuera en JavaFX en utilisant IntelliJ : https://docs.oracle.com/javase/8/javafx/api/toc.htm
