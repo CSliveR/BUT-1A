@@ -1,0 +1,49 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+  width: 230px;
+}
+
+figcaption{
+  color:blue;
+  font-weight: bold;
+  text-align: center;
+}
+
+p{
+  text-align: center;
+}
+
+main{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+span, p{
+  padding: 10px;
+  border: 2px solid #fce8a6;
+  box-sizing: border-box;
+  margin-left: 13%;
+}
+
+img{
+  border-radius: 30px ;
+}
+
+div{
+  position: relative;
+}
+
+.badge{
+  background-color: rgba(9, 255, 0, 0.342);
+  opacity: 0.9;
+  color: white;
+  border-radius: 30px;
+  border: 1px solid black;
+  position: absolute;
+  top: 17px;
+  left: 100px;
+}

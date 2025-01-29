@@ -1,0 +1,66 @@
+body{
+    font-family: Calibri,Arial,sans-serif;
+    color: white;
+    background-color: #343752;
+}
+
+article{
+    width: 310px;
+    height: 150px;
+    margin: 4px;
+}
+
+#email, #finance, #calendar, #weather{
+    padding: 10px;
+}
+
+#game, #music, #trip{
+    width: 150px;
+    height: 150px;
+    margin-left: 5px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container{
+    display: flex;
+}
+
+aside{
+    float: right;
+}
+
+/*couleurs*/
+
+#email{
+    background-color: #37B6B7;
+ }
+
+ #finance{
+    background-color: #683FB7;
+ }
+
+
+#calendar{
+    background-color: #B71C54;
+
+ }
+
+#weather{
+    background-color: #4C98E7;
+}
+
+#game{
+    background-color:  #B71C54;
+}
+
+#music{
+    background-color: #DA542D;
+}
+
+

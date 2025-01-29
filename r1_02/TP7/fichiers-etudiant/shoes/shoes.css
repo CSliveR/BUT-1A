@@ -1,0 +1,72 @@
+body{
+    width: 1000px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+    color: hotpink;
+    font-weight: bold;
+    padding-bottom: 15px;
+    font-size: x-large;
+}
+
+nav ul{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+nav ul li{
+    font-weight: bold;
+    text-transform: uppercase;  
+    padding:15px;
+}
+
+nav ul li:last-child{
+    color: hotpink;
+}
+
+nav ul li:hover{
+    background-color: black;
+    color:white;
+}
+
+div{position: relative;}
+
+section{
+    position: absolute;
+    bottom: 0;
+    margin: 20px;
+    display: flex;
+    gap: 30px;
+}
+
+section p{
+    background-color: white;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px;
+}
+
+div a img{
+    border: 1px solid black;
+    padding:3px;
+}
+
+div a img:hover{
+    transform: scale(1.1);
+}
+
+footer{
+    display: flex;
+    margin-left: 80px;
+    text-align: center;
+    margin-top: 15px;
+    justify-content: space-around;
+}
+
+footer a {
+    color:hotpink;
+}

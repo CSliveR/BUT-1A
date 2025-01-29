@@ -1,0 +1,6 @@
+ TP1: Introduction à HTML5
+ ---------------------------
+ 
+Le fichier page1.html a une syntaxe valide.
+
+Le fichier page2.html n'a pas une syntaxe valide.
