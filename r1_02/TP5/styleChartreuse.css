@@ -1,0 +1,50 @@
+body{
+    width:90%;
+    margin: auto 0;
+}
+
+h1{
+    font-weight: bold;
+    text-align: center;
+    color: #626262;
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;  
+}
+
+nav ul li{
+    list-style-type: none;
+    border: solid #626262 1px;
+    color: #626262;
+    font-size: x-large;
+    font-weight: bold;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+}
+
+main{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div{
+    margin-left: 200px;
+}
+
+p{
+    font-size: x-large;
+    background-color: #B2924D ;
+    color: white;
+}
+
+h2{
+    color:#9FAF3A ;
+}
+
+li:hover{
+    background-color: #626262;
+    color: white;
+}

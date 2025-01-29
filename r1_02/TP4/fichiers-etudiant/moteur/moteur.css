@@ -1,0 +1,21 @@
+nav ul {
+    display: flex;
+    background-color: gray;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+}
+
+nav ul li{
+    list-style-type: none;
+}
+
+a{
+    padding: 1em 2em 1em 2em;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    background-color: tomato;
+}
