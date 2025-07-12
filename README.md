@@ -3,8 +3,8 @@
 ## Description
 This repository gathers all the content stored on my computer related to my first year of the Computer Science Bachelor program at the IUT2 of Grenoble.
 
-## Resources
-The content is organized by resources, which correspond to the different subjects (modules) taught during the first year.
+## Repository content
+The content of this repository is organized by resources, which correspond to the different subjects (modules) taught during the first year.
 
 ### About resource naming
 
