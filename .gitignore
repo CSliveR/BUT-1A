@@ -59,3 +59,13 @@ Thumbs.db
 *.Rhistory
 
 S1.05-06/
+
+*~
+*.odt
+*.ods
+*.odp
+*.zip
+*.tar.gz
+*.rar
+*.bak
+*.old
