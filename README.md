@@ -26,7 +26,8 @@ For example:
 - R1.04 : Introduction to operating systems and command line basics with the Bash shell  
 - R1.05 : Fundamentals of relational databases and SQL  
 - R2.01 : Object-oriented development with Java  
-- R2.02 : GUI application development with JavaFX  
+- R2.02 : GUI application development with JavaFX
+- R2.05 : Introduction to network services  
 - R2.06 : Database querying and advanced manipulation  
 - R2.11 : Introduction to Law  
 - S1.03 : Installing and configuring a Debian 12 workstation for development purposes  
