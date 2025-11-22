@@ -27,10 +27,15 @@ For example:
 - R1.05 : Fundamentals of relational databases and SQL  
 - R2.01 : Object-oriented development with Java  
 - R2.02 : GUI application development with JavaFX
-- R2.05 : Introduction to network services  
+- R2.05 : Introduction to network services
+
 - R2.06 : Database querying and advanced manipulation  
 - R2.11 : Introduction to Law  
 - S1.03 : Installing and configuring a Debian 12 workstation for development purposes  
 - S1.04 : Database creation related to the Titanic sinking  
 - S2.03 : Network services installation  
 - S2.04 : Database project on the Nutriscore dataset
+- S2 - Mega SAE : https://github.com/CSliveR/Chief-s-Arena
+### Docs 
+All the documents related to the resources and projects are available at the following link: [BUT-1A](https://drive.google.com/drive/folders/1f2lD-Byl2-cXQNur1GpCgdeijhV8sH8Y)
+
